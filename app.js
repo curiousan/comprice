@@ -7,11 +7,11 @@ var bodyParser = require('body-parser');
 var passport=require('passport');
 var passportLocal=require('passport-local').Strategy;
 var session =require('express-session');
-var Director=require('./routes/Director');
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var login=require('./routes/login');
-var register=require('./routes/register');
+var Director=require('./app_server/routes/Director');
+var routes = require('./app_server/routes/index');
+//var users = require('./app_server/routes/users');
+var login=require('./app_server/routes/login');
+var register=require('./app_server/routes/register');
 var mongoose=require('mongoose');
 
 require('./app_api/models/db');
