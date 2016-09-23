@@ -1,20 +1,27 @@
 var mongoose = require( 'mongoose' );
 var dbURI = 'mongodb://localhost/comprice';
-var logDB =mongoose.createConnection(dbURI);
-logDB.on('connected', function(){
+if (process.env.NODE_ENV === 'production') {
+  dbURI =  'mongodb://root:root@ds033056.mlab.com:33056/comprice';
+}
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } },
+                  }; 
+
+var logDB =mongoose.connect(dbURI,options);
+logDB.connection.on('connected', function(){
 	console.log('mongoose connected to '+dbURI);
 });
-logDB.on('error', function(){
+logDB.connection.on('error', function(){
 	console.log('mongoose connection error: '+err);
 });
 
-logDB.on('disconnected',function(){
+logDB.connection.on('disconnected',function(){
 	console.log('mongoose disconnected');
 });
 // CAPTURE APP TERMINATION / RESTART EVENTS
 // To be called when process is restarted or terminated
-gracefulShutdown = function(msg, callback) {
-    logDB.close(function() {
+ gracefulShutdown = function(msg, callback) {
+    logDB.disconnect(function() {
         console.log('Mongoose disconnected through ' + msg);
         callback();
     });
