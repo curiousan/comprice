@@ -25,7 +25,7 @@ var openingTimeSchema = new mongoose.Schema({
 var storeSchema = new mongoose.Schema({ 
 	name: { type: String, required: true},
 	address:{type:String, required: true},
-	coords: {type: [Number], index: '2dsphere', 2dsphereIndexVersion:2},
+	coords: {type: [Number], index: '2dsphere'} ,
 	openingTime: [openingTimeSchema],
 	products: [productSchema]
 
