@@ -28,7 +28,7 @@ var storeSchema = new mongoose.Schema({
 	name: { type: String, required: true},
 	address:{type:String, required: true},
 	coords: {type: [Number], index: '2dsphere'} ,
-	openingTime: [openingTimeSchema],
+    openingTime: [openingTimeSchema],
 	products: [productSchema]
 
 
