@@ -1,5 +1,6 @@
 var mongoose = require( 'mongoose' );
 var express = require('express');
+var promise = require('bluebird');
 
 var electronicsSchema = new mongoose.Schema({
 	stocks: {type: String, required: true},

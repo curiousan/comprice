@@ -1,6 +1,8 @@
 var mongoose = require( 'mongoose' );
-var food  = require('./food');
+var food  = require('./Food');
 var cloth = require('./clothing');
+var promise = require('bluebird');
+
 var electronicsItem = require('./electronics');
 var reviewSchema = new mongoose.Schema({
     author: String,
