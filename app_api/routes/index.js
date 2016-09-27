@@ -36,7 +36,7 @@ router.delete(',/localShops/:shopId',localShops.deleteShop);
 
 
 */
-//get request for all products in a specific shops
+//get request for all products in a specific shop
 router.get('/localShops/:shopId/products',ctrlProduct.getAllProducts);
 
 //add a products

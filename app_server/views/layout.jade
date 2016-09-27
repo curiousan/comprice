@@ -1,5 +1,5 @@
 doctype html
-html(ng-app="comprice")
+html(ng-app="compriceApp")
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
@@ -7,6 +7,9 @@ html(ng-app="comprice")
     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-resource.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-route.js')
     script(src="https://code.jquery.com/jquery-1.10.2.js")
+    script(src="/app.js")
+    script(src='/homepage/home.controller.js')
+    script(src='/common/services/services.js')
     link(rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
     script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
@@ -25,4 +28,6 @@ html(ng-app="comprice")
         button(class="btn btn-outline-success" type="submit") Search
     span(id="username")
       h1= username
-    block content
+    .container
+      div(ng-view)
+        block content

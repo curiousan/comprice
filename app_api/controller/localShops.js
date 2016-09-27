@@ -23,10 +23,7 @@ module.exports.getAllShops = function (req, res) {
 //get a specific shop   
   module.exports.getShop = function (req, res) {
       new Promise(function(resolve, reject){
-          
-    
-
-   console.log('finding store details', req.params);
+    console.log('finding store details', req.params);
    if(req.params && req.params.shopId){
    	store
    	.findById(req.params.shopId)
