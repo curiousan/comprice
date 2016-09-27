@@ -1,5 +1,6 @@
 var mongoose = require( 'mongoose' );
 var express = require('express');
+var promise = require('bluebird');
 
 var productSchema = require('./product');
 
@@ -14,6 +15,7 @@ var openingTimeSchema = new mongoose.Schema({
 	closed: Boolean
 
 },{_id : false});
+
 
 
 

@@ -9,6 +9,24 @@ var store = mongoose.model('store');
   	res.status(status);
   	res.json(content);
   };
+
+// ready to use function to calculate radians to km and vise -versa
+var theEarth = (function() {
+  var earthRadius = 6371; // km, miles is 3959
+
+  var getDistanceFromRads = function(rads) {
+    return parseFloat(rads * earthRadius);
+  };
+
+  var getRadsFromDistance = function(distance) {
+    return parseFloat(distance / earthRadius);
+  };
+
+  return {
+    getDistanceFromRads: getDistanceFromRads,
+    getRadsFromDistance: getRadsFromDistance
+  };
+})();
 /*
 ************ controller for Shops ******************
 */
@@ -16,19 +34,32 @@ var store = mongoose.model('store');
 
 //get all shops
 module.exports.getAllShops = function (req, res) {
-    res.status(200);
-    res.json({"status" : "getAllShops"});
+    new Promise(function(resolve,reject){
+     store.
+    find().
+    sort('name').
+    select('name address coordinates openingTime').
+    exec(function(err,result){
+        if(err){
+            sendJsonResponse(res,404,{
+                "message":"no shops found"
+            });
+            reject(err);
+        } else{
+             sendJsonResponse(res,200,result)
+            resolve(result);
+           
+        }
+    });
+   });
   };
 
 //get a specific shop   
   module.exports.getShop = function (req, res) {
-      new Promise(function(resolve, reject){
-          
-    
-
-   console.log('finding store details', req.params);
+    new Promise(function(resolve, reject){
+  console.log('finding store details', req.params);
    if(req.params && req.params.shopId){
-   	store
+   	 store
    	.findById(req.params.shopId)
    	.exec(function(err,store){
    		if(!store){
@@ -89,14 +120,137 @@ closed: req.body.closed2
 
  //update an existing  shop
 module.exports.updateShop = function (req, res) {
-    res.status(200);
-    res.json({"status" : "getAllShops"});
-  };
-
+    if(!req.params.shopId){
+        sendJsonResponse(res,404,{
+            "message":"Not found shop id is required"
+        });
+        return;
+    }
+    new Promise(function(resolve,reject){
+        
+    
+    store
+    .findById(req.params.shopId)
+    .select('-products')
+    .exec(
+    function(err,store){
+        if(err){
+            sendJsonResponse(res,404,{
+                "message": "Shop Not found"});
+        
+        return;
+        }
+        resolve(store);
+        
+    });
+    }).then(function(store){
+      new Promise(function(resolve,reject){
+       store.name= req.body.name,
+       store.address= req.body.address,
+       store.coordinates = [parseFloat(req.body.lng),parseFloat(req.body.lat)],
+       store.openingTime = [{
+           days:req.body.day1,
+           opening: req.body.opening1,
+           closing: req.body.closing1,
+           closed: req.body.closed1
+       },{
+           days:req.body.day2,
+           opening: req.body.opening2,
+           closing: req.body.closing2,
+           closed: req.body.closed2 
+       }];
+          store.save(function(err,store){
+              if (err){
+                  reject(sendJsonResponse(res,404,err));
+              }else{
+                  resolve(sendJSONresponse(res,200,store));
+              }
+          }
+       
+   );   
+    })
+  
+  });
+};
  //delete a shop
  module.exports.deleteShop = function (req, res) {
-    res.status(200);
-    res.json({"status" : "getAllShops"});
+   var shopId = req.params.shopId;
+    if (!shopId){
+         sendJsonResponse(res,404,{
+             "message":"please specify the shopn  with the shop id"
+         });
+        return;
+     }
+     new Promise(function(resolve,reject){
+         store.findByIdAndRemove(req.params.shopId)
+         .exec(function(err,done){
+            if(err){
+               reject(sendJsonResponse(res,404,err)
+                     );
+                return;
+            }else{
+                resolve(sendJsonResponse(res,204,null));
+            } 
+         });
+     });
   }; 
+
+//find the nearby shops
+module.exports.findShops = function(req,res){
+    var lng = parseFloat(req.query.lng);
+    var lat = parseFloat(req.query.lat);
+    var maxDistance = parseFloat(req.query.maxDistance);
+    var point =  {
+        type: "Point",
+        coordinates: [lng,lat]
+    };
+   
+    var geoOptions = {
+        spherical: true,
+        maxDistance: (maxDistance/6371),
+        num:10
+    };
+        
+       
+        
+    
+    // console.log('searching within the range of ' +geoOptions.maxDistance);
+    if(!lng || !lat || !maxDistance){
+        console.log(' all query param are required');
+        sendJsonResponse(res,404,{
+            "message": "longitude , laltitude and  maximum distance are not provided"
+        });
+        return;
+    }
+    store.geoNear(point,geoOptions,function(err,results,stats) {
+        var Stores;
+        console.log('Geo Results', results);
+        console.log('Geo stats', stats);
+        if(err){
+            console.log('GeoNear error' , err);
+            sendJsonResponse(res,404,err);
+        }else{
+            Stores = collectStores(req,res, results, stats);
+            sendJsonResponse(res,200, Stores)
+        }
+    });
+    
+};
+  var collectStores = function(req, res, results,stats) {
+      var stores = [];
+      results.forEach(function(doc){
+          console.log(doc);
+         stores.push({
+             distance: (doc.dis*6371),
+             name: doc.obj.name,
+             address: doc.obj.address,
+             openingTime: doc.obj.openingTime,
+             coords: doc.obj.coords,
+             _id:  doc.obj._id
+             
+         }); 
+      });
+      return stores;
+  };
 
  module.exports.jsonResponse = sendJSONresponse;

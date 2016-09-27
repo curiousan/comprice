@@ -1,6 +1,6 @@
  var shop =require('./localShops');
  var mongoose = require('mongoose');
-  //require('../models/store');
+  var Promise = require('bluebird');
  var store = mongoose.model('store');
  sendJsonResponse = shop.jsonResponse;
 
@@ -47,8 +47,33 @@ var  addProduct = function(req,res,store){
 
 //get all the products
  module.exports.getAllProducts = function (req, res) {
-  res.status(200);
-  res.json({"status" : "getAllProducts"});
+       if(!req.params.shopId){
+      sendJSONresponse(res,404,{
+          "message": "shop id is required"
+      });
+    return;  
+  }
+     new Promise(function(resolve,reject){
+ 
+      console.log("finding all the products of the store "+ req.params.shopId);
+          store.findById(req.params.shopId)
+          .select('products')
+          .exec(
+          function(err,result){
+            if(err){
+               reject( sendJSONresponse(res,404,{
+                    "message":"products not found on the given shop"
+                }));
+                
+            } else{
+                       resolve(result);
+                 }  
+          });
+         
+      
+  }).then(function(result){
+          sendJSONresponse(res,200,result);
+          });
 };
 
 
@@ -56,7 +81,7 @@ var  addProduct = function(req,res,store){
 module.exports.getProduct = function (req, res) {
   if(req.params.shopId && req.params.productId){
       store
-      .findById(req.param.shopId)
+      .findById(req.params.shopId)
       .select('products')
       .exec(
       function(err,store){
@@ -124,15 +149,94 @@ module.exports.addItems = function (req, res) {
 
 //updating a product
 module.exports.updateProduct = function (req, res) {
-  res.status(200);
-  res.json({"status" : "getProduct"});
+ if(!req.params.shopId && req.params.productId){
+     sendJSONresponse(res,404,{
+         "message":" Shop id and product Id is required"
+     });
+     return;
+ }
+    new Promise(function(resolve,reject){
+       store.findById(req.params.shopId)
+       .select(products)
+       .exec(function(err,store){
+           if(err){
+              reject(sendJSONresponse(res,404,{
+                   
+               "message": "shop not found"
+               }));
+           return;
+           }
+           resolve(store)
+       });
+    }).then(function(store){
+        new Promise(function(resolve,reject){
+            store.findById(req.params.productId)
+            .exec(function(err,product){
+                if(err){
+                    reject(sendJSONresponse(res,404,err)
+                          );
+                    return;
+                }else{
+                    resolve(product);
+                }
+            });
+        }).then(function(product){
+             product.uniqueKey = req.body.uniqueKey;
+             product.name = req.body.name;
+             product.brand = req.body.brand;
+             product.img = req.body.img;
+             product.price = req.body.price;
+             store.save(function(err,store){
+                 if(err){
+                     reject(sendJSONresponse(res,404,err));
+                     
+                 }else{
+                     resolve(sendJSONresponse(res,200,product));
+                 }
+             });
+        });
+    });
+   
 };
 
 
 //deleting a product
 module.exports.deleteProduct = function (req, res) {
-  res.status(200);
-  res.json({"status" : "getProduct"});
+ if(!req.params.shopId && req.params.productId){
+     sendJSONresponse(res,404,{
+         "message":" Shop id and product Id is required"
+     });
+     return;
+ }
+    new Promise(function(resolve,reject){
+       store.findById(req.params.shopId)
+       .select(products)
+       .exec(function(err,store){
+           if(err){
+              reject(sendJSONresponse(res,404,{
+                   
+               "message": "shop not found"
+               }));
+           return;
+           }
+           resolve(store)
+       });
+    }).then(function(store){
+        new Promise(function(resolve,reject){
+            store.products.id(req.params.productId).remove();
+            store.save(function(err,store){
+                 if(err){
+                     reject(sendJSONresponse(res,404,err));
+                     
+                 }else{
+                    resolve(sendJSONresponse(res,404,{
+                   
+               "message": "shop not found"
+               }));
+                 }
+             });
+        });
+    });
 };
 
 

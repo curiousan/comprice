@@ -27,9 +27,10 @@ router.get('/localShops/:shopId',localShops.getShop);
 router.put('/localShops/:shopId',localShops.updateShop);
 
 //delete a specific shops
-router.delete(',/localShops/:shopId',localShops.deleteShop);
+router.delete('/localShops/:shopId',localShops.deleteShop);
 
-
+// find the shops nearby
+router.get('/localShops/findtheshops/nearbyShops',localShops.findShops);
 
 /*
 ******** products ****************
