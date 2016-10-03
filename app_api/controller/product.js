@@ -230,6 +230,7 @@ module.exports.searchItem = function (req, res) {
         products.find({"keywords": new RegExp(searchText)})
         .exec(function(err,result){
             if(err){
+                console.log(err);
                reject(sendJSONresponse(res,404,{
                    
                "message": "product not found"

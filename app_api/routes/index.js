@@ -52,7 +52,7 @@ router.get('/products',ctrlProduct.getAllProducts);
 router.post('/localShops/:shopId/products',ctrlProduct.addItems);
 
 // get specific items of a specific shops
-router.get('/products/:productId',ctrlProduct.getProduct);
+router.get('/products/getProduct/:productId',ctrlProduct.getProduct);
 
 //update a product
 router.put('/products/:productId',ctrlProduct.updateProduct);
