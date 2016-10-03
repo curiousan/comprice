@@ -1,0 +1,103 @@
+
+ <head>
+    <!-- Material Design Lite -->
+    <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.light_green-indigo.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css"> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>  
+     
+      
+      <style>
+          @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+          
+          .mdl-layout__header{
+              height: 12.5%;
+          }
+          .mdl-layout__header-row{
+              height: 100%;
+          }
+          .mdl-layout-title, #logo{
+              height: inherit;
+          }
+          .mdl-layout--fixed-drawer{
+              margin-top: 7%;
+                overflow: hidden;
+          }
+          
+      .slider {
+ width: 85%;
+ height: auto;
+ margin:auto;
+float:left;
+}
+
+.slider .bar {
+ width: 100%;
+ height: 5px;
+ background: #43A047;
+}
+
+
+input[type="range"] {
+ -webkit-appearance: none;
+ height: 2px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+ -webkit-appearance: none;
+ position: relative;
+ top: 0px;
+ z-index: 1;
+ width: 11px;
+ height: 11px;
+ cursor: pointer;
+ -webkit-box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.6);
+ -moz-box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.6);
+ box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.6);
+ -webkit-border-radius: 40px;
+ -moz-border-radius: 40px;
+ border-radius: 40px;
+ background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ebf1f6), color-stop(50%,#abd3ee), color-stop(51%,#89c3eb), color-stop(100%,#d5ebfb));
+}
+
+.output{
+height:auto;
+width:15%;
+    text-align: center;
+    margin-top: -3px;
+float:right;
+    </style>
+  </head>
+
+<body>
+<div class="mdl-layout__container">
+            <div class="mdl-layout mdl-js-layoutmdl-layout--fixed-drawermdl-layout--fixed-header">
+                <main class="mdl-layout__content mdl-color--grey-100">
+                    <div class="mdl-grid">
+                        <div class="mdl-color--whitemdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <!-- Simple Textfield -->
+                                <form action="#">
+                                    <div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
+                                        <select id="profile_information_form_country_id" name="profile_information_form_country" class="mdl-selectfield__select" required>
+                                            <option value=""></option>
+                                            <option value="1">Category1</option>
+                                            <option value="2">Category2</option>
+                                            <option value="3">Category3</option>
+                                            </select>
+                                        <label for="profile_information_form_country_id" class="mdl-selectfield__label">Country</label>
+                                        <span class="mdl-selectfield__error">Input is not a empty!</span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+</body>
