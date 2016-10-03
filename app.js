@@ -13,26 +13,26 @@ var routes = require('./app_server/routes/index');
 var login=require('./app_server/routes/login');
 var register=require('./app_server/routes/register');
 var mongoose=require('mongoose');
+var fs = require('fs');
+
+
 
 require('./app_api/models/db');
-//require('./app_api/models/clothing');
-//require('./app_api/models/electronics');
-//require('./app_api/models/Food');
+
 require('./app_api/models/store');
-
-<<<<<<< HEAD
-
-var routes = require('./app_server/routes/index');
-=======
 var serverRoute = require('./app_server/routes/index');
->>>>>>> 7858e7527f4fa27f4bbfb082cb2e82dc073d0cc3
+
 var apiRoutes = require('./app_api/routes/index');
 
-//var users = require('./app_server/routes/users');
+
 
 var app = express();
 
+
+
+
 // view engine setup
+
 app.set('views', path.join(__dirname, 'app_server','views'));
 app.use(passport.initialize());
 app.use(passport.session());

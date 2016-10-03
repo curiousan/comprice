@@ -1,42 +1,107 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
-1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
-1 verbose cli   'start' ]
-2 info using npm@2.15.8
-3 info using node@v4.4.7
-4 verbose run-script [ 'prestart', 'start', 'poststart' ]
-5 info prestart comprice@0.0.0
-6 info start comprice@0.0.0
-7 verbose unsafe-perm in lifecycle true
-8 info comprice@0.0.0 Failed to exec start script
-9 verbose stack Error: comprice@0.0.0 start: `node ./bin/www`
-9 verbose stack Exit status 1
-9 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:217:16)
-9 verbose stack     at emitTwo (events.js:87:13)
-9 verbose stack     at EventEmitter.emit (events.js:172:7)
-9 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:24:14)
-9 verbose stack     at emitTwo (events.js:87:13)
-9 verbose stack     at ChildProcess.emit (events.js:172:7)
-9 verbose stack     at maybeClose (internal/child_process.js:827:16)
-9 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
-10 verbose pkgid comprice@0.0.0
-11 verbose cwd C:\Users\The BigBang\Desktop\comprice
-12 error Windows_NT 6.1.7601
-13 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "start"
-14 error node v4.4.7
-15 error npm  v2.15.8
-16 error code ELIFECYCLE
-17 error comprice@0.0.0 start: `node ./bin/www`
-17 error Exit status 1
-18 error Failed at the comprice@0.0.0 start script 'node ./bin/www'.
-18 error This is most likely a problem with the comprice package,
-18 error not with npm itself.
-18 error Tell the author that this fails on your system:
-18 error     node ./bin/www
-18 error You can get information on how to open an issue for this project with:
-18 error     npm bugs comprice
-18 error Or if that isn't available, you can get their info via:
-18 error
-18 error     npm owner ls comprice
-18 error There is likely additional logging output above.
-19 verbose exit [ 1, true ]
+1 verbose cli [ '/Users/sandeshpoudel/.nvm/v0.10.32/bin/node',
+1 verbose cli   '/Users/sandeshpoudel/.nvm/v0.10.32/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'git+',
+1 verbose cli   'https://github.com/RiptideElements/s3fs.git' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose readDependencies using package.json deps
+5 verbose cache add [ 'git+', null ]
+6 verbose cache add name=undefined spec="git+" args=["git+",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'git+',
+7 verbose parsed url   path: 'git+',
+7 verbose parsed url   href: 'git+' }
+8 verbose cache add [ 'https://github.com/RiptideElements/s3fs.git', null ]
+9 verbose cache add name=undefined spec="https://github.com/RiptideElements/s3fs.git" args=["https://github.com/RiptideElements/s3fs.git",null]
+10 verbose parsed url { protocol: 'https:',
+10 verbose parsed url   slashes: true,
+10 verbose parsed url   auth: null,
+10 verbose parsed url   host: 'github.com',
+10 verbose parsed url   port: null,
+10 verbose parsed url   hostname: 'github.com',
+10 verbose parsed url   hash: null,
+10 verbose parsed url   search: null,
+10 verbose parsed url   query: null,
+10 verbose parsed url   pathname: '/RiptideElements/s3fs.git',
+10 verbose parsed url   path: '/RiptideElements/s3fs.git',
+10 verbose parsed url   href: 'https://github.com/RiptideElements/s3fs.git' }
+11 silly lockFile 0154b246-hub-com-RiptideElements-s3fs-git https://github.com/RiptideElements/s3fs.git
+12 verbose lock https://github.com/RiptideElements/s3fs.git /Users/sandeshpoudel/.npm/0154b246-hub-com-RiptideElements-s3fs-git.lock
+13 silly lockFile 22d995ed-git git+
+14 verbose lock git+ /Users/sandeshpoudel/.npm/22d995ed-git.lock
+15 verbose addRemoteTarball [ 'https://github.com/RiptideElements/s3fs.git', null ]
+16 silly lockFile 22d995ed-git git+
+17 silly lockFile 22d995ed-git git+
+18 verbose addNamed [ 'git+', '' ]
+19 verbose addNamed [ null, '*' ]
+20 silly lockFile e806b960-git git+@
+21 verbose lock git+@ /Users/sandeshpoudel/.npm/e806b960-git.lock
+22 silly addNameRange { name: 'git+', range: '*', hasData: false }
+23 info retry fetch attempt 1 at 00:17:13
+24 verbose fetch to= /var/folders/hb/fm6x_tg95ssb918cp6178kh40000gn/T/npm-1574-DOUEO0-M/github.com/RiptideElements/s3fs.git
+25 verbose request where is /git+
+26 verbose request registry https://registry.npmjs.org/
+27 verbose request id 9cdada7441416a20
+28 verbose url raw /git+
+29 verbose url resolving [ 'https://registry.npmjs.org/', './git%2B' ]
+30 verbose url resolved https://registry.npmjs.org/git%2B
+31 verbose request where is https://registry.npmjs.org/git%2B
+32 info trying registry request attempt 1 at 00:17:13
+33 http GET https://registry.npmjs.org/git%2B
+34 http GET https://github.com/RiptideElements/s3fs.git
+35 http 404 https://registry.npmjs.org/git%2B
+36 silly registry.get cb [ 404,
+36 silly registry.get   { 'content-type': 'application/json',
+36 silly registry.get     'cache-control': 'max-age=0',
+36 silly registry.get     'content-length': '2',
+36 silly registry.get     'accept-ranges': 'bytes',
+36 silly registry.get     date: 'Sun, 02 Oct 2016 21:17:14 GMT',
+36 silly registry.get     via: '1.1 varnish',
+36 silly registry.get     age: '0',
+36 silly registry.get     connection: 'keep-alive',
+36 silly registry.get     'x-served-by': 'cache-bma7025-BMA',
+36 silly registry.get     'x-cache': 'MISS',
+36 silly registry.get     'x-cache-hits': '0',
+36 silly registry.get     'x-timer': 'S1475443033.425533,VS0,VE789',
+36 silly registry.get     vary: 'Accept-Encoding' } ]
+37 silly lockFile e806b960-git git+@
+38 silly lockFile e806b960-git git+@
+39 http 200 https://github.com/RiptideElements/s3fs.git
+40 verbose tar unpack /var/folders/hb/fm6x_tg95ssb918cp6178kh40000gn/T/npm-1574-DOUEO0-M/github.com/RiptideElements/s3fs.git
+41 silly lockFile 6ec87e88--RiptideElements-s3fs-git-unpack tar:///var/folders/hb/fm6x_tg95ssb918cp6178kh40000gn/T/npm-1574-DOUEO0-M/github.com/RiptideElements/s3fs.git-unpack
+42 verbose lock tar:///var/folders/hb/fm6x_tg95ssb918cp6178kh40000gn/T/npm-1574-DOUEO0-M/github.com/RiptideElements/s3fs.git-unpack /Users/sandeshpoudel/.npm/6ec87e88--RiptideElements-s3fs-git-unpack.lock
+43 silly lockFile 7a59fa9f-hub-com-RiptideElements-s3fs-git tar:///var/folders/hb/fm6x_tg95ssb918cp6178kh40000gn/T/npm-1574-DOUEO0-M/github.com/RiptideElements/s3fs.git
+44 verbose lock tar:///var/folders/hb/fm6x_tg95ssb918cp6178kh40000gn/T/npm-1574-DOUEO0-M/github.com/RiptideElements/s3fs.git /Users/sandeshpoudel/.npm/7a59fa9f-hub-com-RiptideElements-s3fs-git.lock
+45 silly gunzTarPerm modes [ '755', '644' ]
+46 error not a package /var/folders/hb/fm6x_tg95ssb918cp6178kh40000gn/T/npm-1574-DOUEO0-M/github.com/RiptideElements/s3fs.git
+47 silly lockFile 6ec87e88--RiptideElements-s3fs-git-unpack tar:///var/folders/hb/fm6x_tg95ssb918cp6178kh40000gn/T/npm-1574-DOUEO0-M/github.com/RiptideElements/s3fs.git-unpack
+48 silly lockFile 6ec87e88--RiptideElements-s3fs-git-unpack tar:///var/folders/hb/fm6x_tg95ssb918cp6178kh40000gn/T/npm-1574-DOUEO0-M/github.com/RiptideElements/s3fs.git-unpack
+49 silly lockFile 7a59fa9f-hub-com-RiptideElements-s3fs-git tar:///var/folders/hb/fm6x_tg95ssb918cp6178kh40000gn/T/npm-1574-DOUEO0-M/github.com/RiptideElements/s3fs.git
+50 silly lockFile 7a59fa9f-hub-com-RiptideElements-s3fs-git tar:///var/folders/hb/fm6x_tg95ssb918cp6178kh40000gn/T/npm-1574-DOUEO0-M/github.com/RiptideElements/s3fs.git
+51 silly lockFile 0154b246-hub-com-RiptideElements-s3fs-git https://github.com/RiptideElements/s3fs.git
+52 silly lockFile 0154b246-hub-com-RiptideElements-s3fs-git https://github.com/RiptideElements/s3fs.git
+53 error 404 Not Found
+53 error 404
+53 error 404 'git+' is not in the npm registry.
+53 error 404 You should bug the author to publish it
+53 error 404 It was specified as a dependency of 'comprice'
+53 error 404
+53 error 404 Note that you can also install from a
+53 error 404 tarball, folder, or http url, or git url.
+54 error System Darwin 15.5.0
+55 error command "/Users/sandeshpoudel/.nvm/v0.10.32/bin/node" "/Users/sandeshpoudel/.nvm/v0.10.32/bin/npm" "install" "git+" "https://github.com/RiptideElements/s3fs.git"
+56 error cwd /Users/sandeshpoudel/Documents/courses/Autumn 2016/Software Business Start-Up TX00CO28-3001/comprice
+57 error node -v v0.10.32
+58 error npm -v 1.4.28
+59 error code E404
+60 verbose exit [ 1, true ]

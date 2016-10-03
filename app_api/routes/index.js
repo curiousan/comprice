@@ -2,10 +2,18 @@
 
 var express = require('express');
 var router = express.Router();
+var aws = require('aws-sdk');
 var ctrlAbout = require('../controller/About');
 var ctrlProduct = require('../controller/product');
 var localShops = require('../controller/localShops');
+var fs = require('fs');
 
+aws.config.update({
+     accessKeyId: "AKIAJ4I6F5YLFZ3JNW2A",
+    secretAccessKey: "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"
+      
+});
+var s3 = new aws.S3();
 /*
 ********** Local Shops **********
 
@@ -38,22 +46,48 @@ router.get('/localShops/findtheshops/nearbyShops',localShops.findShops);
 
 */
 //get request for all products in a specific shops
-router.get('/localShops/:shopId/products',ctrlProduct.getAllProducts);
+router.get('/products',ctrlProduct.getAllProducts);
 
 //add a products
 router.post('/localShops/:shopId/products',ctrlProduct.addItems);
 
 // get specific items of a specific shops
-router.get('/localShops/:shopId/products/:productId',ctrlProduct.getProduct);
+router.get('/products/:productId',ctrlProduct.getProduct);
 
 //update a product
-router.put('/localShops/:shopId/products/:productId',ctrlProduct.updateProduct);
+router.put('/products/:productId',ctrlProduct.updateProduct);
 
 //Delete a specific product 
-router.delete('/localShops/:shopId/products/:productId',ctrlProduct.deleteProduct);
+router.delete('/products/:productId',ctrlProduct.deleteProduct);
 
 //search an items
-router.get ('/products/searchItem?=:itemsKeywords',ctrlProduct.searchItem);
+router.get ('/products/searchItem',ctrlProduct.searchItem);
 
-
+//test amazon web services 
+router.get('/getBuckets', function(res,res){
+   s3.listBuckets(function(err, buckets){
+       if (err){
+           console.log(err);
+       }else{
+       res.json(buckets);
+       }
+   }) ;
+    
+});
+router.post('/addFiles', function(req,res){
+   var request = {
+       Body: fs.readFileSync(req.files.uploadedFile.path),
+       Bucket: "compricebucket123",
+       key: req.files.uploadedFile.name
+       
+   };
+    s3.putObject(request, function(err,data){
+        if (err){
+            console.log(err);
+        }else{
+            res.send("done");
+        }
+        
+    });
+});
 module.exports = router;

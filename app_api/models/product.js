@@ -1,9 +1,5 @@
 var mongoose = require( 'mongoose' );
-var food  = require('./Food');
-var cloth = require('./clothing');
 var promise = require('bluebird');
-
-var electronicsItem = require('./electronics');
 var reviewSchema = new mongoose.Schema({
     author: String,
     rating: {
@@ -18,21 +14,26 @@ var reviewSchema = new mongoose.Schema({
         "default": Date.now
     }
 });
+var ObjectIdSchema = mongoose.Schema.ObjectId;
 var productSchema = new mongoose.Schema({
-	uniqueKey : {type: String},
+	uniqueKey : String,
 	name: {type: String, required:true},
 	price: {type: Number, required: true},
 	brand: String,
 	img: {data: Buffer, type: String},
 	reviews: [reviewSchema],
-	foodItems: [food],
-	clothingItems: [cloth],
-	electronicsItem: [electronicsItem]
- 
-
-	
-
-
-
+    shopID: {type:ObjectIdSchema, required:true},
+    shopName:String,
+    keywords: [String],
+    category: String,
+    expiryDate: Date,
+    manufactureDate: Date,
+    validGuarantee: Number,
+    stocks: Number,
+    discounts: Number,
+    size: Number,
+    color: String
+   
 });
-module.export = productSchema;
+module.exports.review = reviewSchema;
+mongoose.model('product',productSchema);

@@ -41,12 +41,12 @@ module.exports.getAllShops = function (req, res) {
     select('name address coordinates openingTime').
     exec(function(err,result){
         if(err){
-            sendJsonResponse(res,404,{
+            sendJSONresponse(res,404,{
                 "message":"no shops found"
             });
             reject(err);
         } else{
-             sendJsonResponse(res,200,result)
+             sendJSONresponse(res,200,result)
             resolve(result);
            
         }
@@ -95,12 +95,12 @@ name: req.body.name,
 address: req.body.address,
 coords: [parseFloat(req.body.lng),parseFloat(req.body.lat)],
 openingTime:[{
-days: req.body.days1,
+days: req.body.day1,
 opening: req.body.opening1,
 closing: req.body.closing1,
 closed: req.body.closed1
 },
-{days: req.body.days2,
+{days: req.body.day2,
 opening: req.body.opening2,
 closing: req.body.closing2,
 closed: req.body.closed2
@@ -121,7 +121,7 @@ closed: req.body.closed2
  //update an existing  shop
 module.exports.updateShop = function (req, res) {
     if(!req.params.shopId){
-        sendJsonResponse(res,404,{
+        sendJSONresponse(res,404,{
             "message":"Not found shop id is required"
         });
         return;
@@ -135,7 +135,7 @@ module.exports.updateShop = function (req, res) {
     .exec(
     function(err,store){
         if(err){
-            sendJsonResponse(res,404,{
+            sendJSONresponse(res,404,{
                 "message": "Shop Not found"});
         
         return;
@@ -161,14 +161,14 @@ module.exports.updateShop = function (req, res) {
        }];
           store.save(function(err,store){
               if (err){
-                  reject(sendJsonResponse(res,404,err));
+                  reject(sendJSONresponse(res,404,err));
               }else{
                   resolve(sendJSONresponse(res,200,store));
               }
           }
        
    );   
-    })
+    });
   
   });
 };
@@ -176,7 +176,7 @@ module.exports.updateShop = function (req, res) {
  module.exports.deleteShop = function (req, res) {
    var shopId = req.params.shopId;
     if (!shopId){
-         sendJsonResponse(res,404,{
+         sendJSONresponse(res,404,{
              "message":"please specify the shopn  with the shop id"
          });
         return;
@@ -185,11 +185,13 @@ module.exports.updateShop = function (req, res) {
          store.findByIdAndRemove(req.params.shopId)
          .exec(function(err,done){
             if(err){
-               reject(sendJsonResponse(res,404,err)
+               reject(sendJSONresponse(res,404,err)
                      );
                 return;
             }else{
-                resolve(sendJsonResponse(res,204,null));
+                resolve(sendJSONresponse(res,204,{
+                    "message": "shop deleted"
+                }));
             } 
          });
      });
@@ -207,7 +209,7 @@ module.exports.findShops = function(req,res){
    
     var geoOptions = {
         spherical: true,
-        maxDistance: (maxDistance/6371),
+        maxDistance: (maxDistance*6371),
         num:10
     };
         
@@ -217,7 +219,7 @@ module.exports.findShops = function(req,res){
     // console.log('searching within the range of ' +geoOptions.maxDistance);
     if(!lng || !lat || !maxDistance){
         console.log(' all query param are required');
-        sendJsonResponse(res,404,{
+        sendJSONresponse(res,404,{
             "message": "longitude , laltitude and  maximum distance are not provided"
         });
         return;
@@ -228,10 +230,10 @@ module.exports.findShops = function(req,res){
         console.log('Geo stats', stats);
         if(err){
             console.log('GeoNear error' , err);
-            sendJsonResponse(res,404,err);
+            sendJSONresponse(res,404,err);
         }else{
             Stores = collectStores(req,res, results, stats);
-            sendJsonResponse(res,200, Stores)
+            sendJSONresponse(res,200, Stores)
         }
     });
     
@@ -241,7 +243,7 @@ module.exports.findShops = function(req,res){
       results.forEach(function(doc){
           console.log(doc);
          stores.push({
-             distance: (doc.dis*6371),
+             distance: (doc.dis/6371),
              name: doc.obj.name,
              address: doc.obj.address,
              openingTime: doc.obj.openingTime,
