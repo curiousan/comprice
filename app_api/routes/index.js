@@ -76,9 +76,9 @@ router.get('/getBuckets', function(res,res){
 });
 router.post('/addFiles', function(req,res){
    var request = {
-       Body: fs.readFileSync(req.files.uploadedFile.path),
+       Body: fs.readFileSync(req.files.path),
        Bucket: "compricebucket123",
-       key: req.files.uploadedFile.name
+       key: req.files.name
        
    };
     s3.putObject(request, function(err,data){

@@ -2,7 +2,8 @@ var shop =require('./localShops');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var products = mongoose.model('product');
-var store = mongoose.model('store');  
+var store = mongoose.model('store');
+var aws = require('aws-sdk');
 sendJSONresponse = shop.jsonResponse;
 
 
@@ -37,13 +38,13 @@ var  addProduct = function(req,res,store){
     size: req.body.size,
     color: req.body.color,
     
-  },function(err,store){
+  },function(err,product){
     var thisProduct;
     if(err){
       sendJSONresponse(res,400,err);
     }else{
       thisProduct = products[products.length - 1];
-      sendJSONresponse(res,201,thisProduct);
+      sendJSONresponse(res,201,product);
     }
   });
 
