@@ -20,7 +20,7 @@ var productSchema = new mongoose.Schema({
 	name: {type: String, required:true},
 	price: {type: Number, required: true},
 	brand: String,
-	img: {data: Buffer, type: String},
+	image: String,
 	reviews: [reviewSchema],
     shopID: {type:ObjectIdSchema, required:true},
     shopName:String,

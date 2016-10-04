@@ -1,0 +1,67 @@
+doctype html
+html
+	head
+		// Material Design Lite
+		title Comprice
+		script(src='https://code.getmdl.io/1.2.1/material.min.js')
+		link(rel='stylesheet', href='https://code.getmdl.io/1.2.1/material.light_green-indigo.min.css')
+		// Material Design icon font
+		link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+		// jQueryUI
+		link(rel='stylesheet', href='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css')
+		script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+		script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js')
+		// Custom Css
+		link(rel='stylesheet', type='text/css', href='base_layout.css')
+	body
+		// Header
+		.mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+			header.mdl-layout__header
+				.mdl-layout__header-row
+					.mdl-layout-title
+						img#logo(src='images/top_img.png')
+					.mdl-layout-spacer
+					#search_holder
+						.mdl-textfield.mdl-js-textfield.mdl-textfield--expandable.mdl-textfield--floating-label.mdl-textfield--align-right
+							label.mdl-button.mdl-js-button.mdl-button--icon(for='fixed-header-drawer-exp')
+								i.material-icons search
+							.mdl-textfield__expandable-holder
+								input#fixed-header-drawer-exp.mdl-textfield__input(type='text', name='sample')
+			.mdl-layout.mdl-js-layout.mdl-layout--fixed-drawer
+				.mdl-layout__drawer
+					nav.mdl-navigation
+						.select_holder
+							// Select
+							.mdl-selectfield
+								label Select Category
+								select.browser-default
+									option(value='', disabled='', selected='') Choose your option
+									option(value='1') Option 1
+									option(value='2') Option 2
+									option(value='3') Option 3
+						// Sliders
+						// Price
+						#price_slider
+							label(for='output') Chose maximum price
+							#eur_output.output.mdl-textfield 50 
+							.slider
+								input#priceRange.bar(type='range', value='50', max='1000', min='0', step='10', onchange="document.getElementById('eur_output').innerHTML = this.value;")
+						// Distance
+						#radius_slider
+							label(for='output') Chose maximum distance
+							#km_output.output.mdl-textfield 50 
+							.slider
+								input#distanceRange.bar(type='range', value='50', max='100', min='0', step='5', onchange="document.getElementById('km_output').innerHTML = this.value;")
+			main.mdl-layout__content(style='margin-left:18%; margin-top:5px;')
+				.demo-card-wide.mdl-card.mdl-shadow--2dp
+					.mdl-card__title
+						h2.mdl-card__title-text Product Name
+					.mdl-card__supporting-text
+						| About product.
+					.mdl-card__actions.mdl-card--border
+						.shopImg
+							img(src='images/EBay_logo.png')
+						.shopPrice
+							| Price Here
+						a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(style='float:right; margin-top:8px;')
+							| View This

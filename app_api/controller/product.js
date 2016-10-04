@@ -247,3 +247,38 @@ module.exports.searchItem = function (req, res) {
     }
   
 };
+
+//filter the product based on price and category
+module.exports.filterItem = function (req, res) {
+   if(req.query.category)var category =req.query.category ;
+   if(req.query.minPrice)var minPrice =req.query.minPrice ;
+   if(req.query.maxPrice)var maxPrice =req.query.maxPrice ;
+  
+  
+   
+        new Promise(function(resolve,reject){
+        products.find({
+            $and :[
+           { category: new RegExp(category)},
+                {price: {$gt: minPrice, $lt: maxPrice}}
+                ]
+        })
+        .exec(function(err,result){
+            if(err){
+                console.log(err);
+               reject(sendJSONresponse(res,404,{
+                   
+               "message": "product not found"
+               }));
+                
+            }else{
+                resolve(result);
+            }
+        });
+         }).then(function(result){
+            console.log(result);
+            sendJSONresponse(res,200,result);
+        }); 
+    
+  
+};

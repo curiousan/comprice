@@ -20,7 +20,7 @@ var s3 = new aws.S3();
 */
 
 //get About our web application
-router.get('/about',ctrlAbout);
+router.get('/files/',ctrlAbout);
 //get request for alll shops
 
 router.get('/localShops',localShops.getAllShops);
@@ -60,8 +60,11 @@ router.put('/products/:productId',ctrlProduct.updateProduct);
 //Delete a specific product 
 router.delete('/products/:productId',ctrlProduct.deleteProduct);
 
-//search an items
+//search the items
 router.get ('/products/searchItem',ctrlProduct.searchItem);
+
+//filter the items
+router.get ('/products/filterItems',ctrlProduct.filterItem);
 
 //test amazon web services 
 router.get('/getBuckets', function(res,res){

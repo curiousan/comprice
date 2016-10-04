@@ -14,8 +14,14 @@ var login=require('./app_server/routes/login');
 var register=require('./app_server/routes/register');
 var mongoose=require('mongoose');
 var fs = require('fs');
-
-
+var aws = require('aws-sdk');
+aws.config.update({
+     accessKeyId: "AKIAIDXDVATPKNJMPUUQ",
+    secretAccessKey: "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"
+      
+});
+var s3 = new aws.S3({"signatureVersion": 'v4',
+                    });
 
 require('./app_api/models/db');
 
@@ -91,5 +97,5 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
+module.exports.S3 = s3;
 module.exports = app;

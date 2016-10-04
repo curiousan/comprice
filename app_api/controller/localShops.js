@@ -3,7 +3,13 @@ var Promise=require('bluebird');
 var mongoose = Promise.promisifyAll(require('mongoose'));
 require('body-parser');
 var store = mongoose.model('store');
-
+var fs = require('fs');
+var s3 = require('./../../app').S3;
+var multer = require('multer');
+var upload = multer({dest: 'uploads'});
+var type = upload.single('uploadedFile');
+var formidable = require("formidable");
+var form = new formidable.IncomingForm();
 //method to send json response
   var sendJSONresponse = function(res,status,content){
   	res.status(status);
@@ -31,7 +37,42 @@ var theEarth = (function() {
 ************ controller for Shops ******************
 */
 
+//test function for file upload 
+var uploadFileToS3 = function(req,res){
+     console.log('FIRST TEST: ' + JSON.stringify(req.file));
+     console.log('Second TEST: ' + JSON.stringify(req.file.originalname));
 
+   var request = {
+       Body: fs.readFileSync(req.file.path),
+       Bucket: "compricebucket123",
+       Key: req.file.originalname
+       
+   };
+    s3.putObject(request, function(err,data){
+        if (err){
+          sendJSONresponse(res,500,{
+              "message": "server error 500"
+          });
+        }
+    });
+};
+
+//test function for file download
+var downloadFileFromS3 = function(req,res,key){
+    var options = {
+       Bucket: "compricebucket123",
+       Key: key
+   };
+     s3.getObject(options,function(err,data){
+         if(err){
+             console.log(err);
+         }else{
+            res.contentType('image/png');
+            res.end(data.Body);
+         }
+        
+     });
+}
 //get all shops
 module.exports.getAllShops = function (req, res) {
     new Promise(function(resolve,reject){
@@ -46,7 +87,7 @@ module.exports.getAllShops = function (req, res) {
             });
             reject(err);
         } else{
-             sendJSONresponse(res,200,result)
+            sendJSONresponse(res,200,result)
             resolve(result);
            
         }
@@ -89,6 +130,8 @@ module.exports.getAllShops = function (req, res) {
 
 //create a  new shop 
 module.exports.addShop = function (req,res) {
+form.parse(req,function(err,fields,files){
+    
 
 store.create({
 name: req.body.name,
@@ -104,7 +147,10 @@ closed: req.body.closed1
 opening: req.body.opening2,
 closing: req.body.closing2,
 closed: req.body.closed2
-}]
+}],
+image: req.file.originalname
+
+                   
 
   
 },function(err,store){
@@ -114,7 +160,7 @@ closed: req.body.closed2
     sendJSONresponse(res,201,store);
   }
 });
-
+});
 
  };
 
