@@ -1,9 +1,9 @@
 var mongoose = require( 'mongoose' );
 mongoose.set('debug', true);
-var dbURI = 'mongodb://localhost/comprice';
-if (process.env.NODE_ENV === 'production') {
-  dbURI =  'mongodb://root:root@ds033056.mlab.com:33056/comprice';
-}
+//var dbURI = 'mongodb://localhost/comprice';
+//if (process.env.NODE_ENV === 'production') {
+ var dbURI =  'mongodb://root:root@ds033056.mlab.com:33056/comprice';
+//}
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
                 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } },
                   }; 
@@ -13,7 +13,7 @@ var logDB =mongoose.connect(dbURI,options);
 logDB.connection.on('connected', function(){
 	console.log('mongoose connected to '+dbURI);
 });
-logDB.connection.on('error', function(){
+logDB.connection.on('error', function(err){
 	console.log('mongoose connection error: '+err);
 });
 

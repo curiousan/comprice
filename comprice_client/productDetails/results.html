@@ -1,0 +1,112 @@
+			<!DOCTYPE HTML>
+			<html>
+			<head>
+				<!-- Material Design Lite -->
+				<title>Comprice</title>
+				<script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+				<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.light_green-indigo.min.css">
+				<!-- Material Design icon font -->
+				<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+				<script>
+					componentHandler.upgradeAllRegistered();
+				</script>
+				<!--jQueryUI -->
+				<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css"> 
+				<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+				<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+				<!--Custom Css-->
+				<link rel="stylesheet" type="text/css" href="/homepage/base_layout.css">
+			</head>
+			<body>
+				<!--Header-->
+				<div class="mdl-layout mdl-js-layout 
+				mdl-layout--fixed-header">
+				<header class="mdl-layout__header">
+					<div class="mdl-layout__header-row">
+						<div class="mdl-layout-title">
+							<img id="logo" src="images/top_img.png"/>
+						</div>
+						<div class="mdl-layout-spacer"></div>
+						<div id="search_holder"> 
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+							mdl-textfield--floating-label mdl-textfield--align-right">
+							<label class="mdl-button mdl-js-button mdl-button--icon"
+							for="fixed-header-drawer-exp">
+							<i class="material-icons">search</i>
+						</label>
+						<div class="mdl-textfield__expandable-holder">
+							<input class="mdl-textfield__input" type="text" name="sample"
+							id="fixed-header-drawer-exp" ng-model="queryProduct">
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+			<div class="mdl-layout__drawer">
+				
+				
+				<nav class="mdl-navigation">
+					<div class="select_holder">
+						<!--Select -->
+						<div class="mdl-selectfield">
+							<label>Select Category</label>
+							<select class="browser-default">
+								<option value="" disabled selected>Choose your option</option>
+								<option value="1">Option 1</option>
+								<option value="2">Option 2</option>
+								<option value="3">Option 3</option>
+							</select>
+						</div>
+					</div>
+					
+					<!--Sliders-->
+					<!--Price--> 
+					<div id="price_slider">
+						<label for="output">Chose maximum price</label> <div class="output mdl-textfield" id="eur_output">50 </div>
+						
+						<div class="slider">
+							<input class="bar" type="range" id="priceRange" value="50" max="1000" min="0" step="10" onchange="document.getElementById('eur_output').innerHTML = this.value;"/>
+						</div>
+					</div>
+					<!--Distance--> 
+					<div id="radius_slider">
+						<label for="output">Chose maximum distance</label> <div class="output mdl-textfield" id="km_output">50 </div>
+						
+						<div class="slider">
+							<input class="bar" type="range" id="distanceRange" value="50" max="100" min="0" step="5" onchange="document.getElementById('km_output').innerHTML = this.value;"/>
+						</div>
+					</div>
+
+				</nav>
+			</div>
+		</div>
+		
+		
+		
+		<main class="mdl-layout__content" style="margin-left:18%; margin-top:5px;">
+			
+			<div class="demo-card-wide mdl-card mdl-shadow--2dp"  ng-controller="detailCtrl">
+				<div class="mdl-card__title">
+					<h2 class="mdl-card__title-text"></h2>
+				</div>
+				<div class="mdl-card__supporting-text">
+
+				</div>
+				<div class="mdl-card__actions mdl-card--border">
+					<div class="shopImg">    
+						<img src="images/EBay_logo.png">
+					</div>
+					<div class="shopPrice">
+						{{vm.data.name}}
+					</div>
+					<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="float:right; margin-top:8px;">
+						View This
+					</a>
+				</div>
+			</div>
+		</main>
+	</div>
+	
+</body>
+</html>

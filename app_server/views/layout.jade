@@ -2,27 +2,24 @@ doctype html
 html(ng-app="comprice")
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='https://code.getmdl.io/1.2.1/material.min.js')
+    link(rel='stylesheet', href='https://code.getmdl.io/1.2.1/material.light_green-indigo.min.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet', href='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css')
+    link(rel="stylesheet" type="text/css" href="/homepage/base_layout.css")
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+    script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js')
+    //script(src='http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-resource.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-route.js')
-    script(src="https://code.jquery.com/jquery-1.10.2.js")
-    link(rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
-    script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
-  body
-    nav(class="navbar navbar-light bg-faded")
-      a(class="navbar-brand" href="#") Comprice
-      ul(class="nav navbar-nav")
-        li(class="nav-item item")
-          a(class="nav-link" href="/home") Home
-        li(class="nav-item item")
-          a(class="nav-link" href="/login") Login
-        li(class="nav-item item")
-          a(class="nav-link" href="/register") Register
-      form(class="form-inline navbar-right")
-        input(class="form-control" type="text" placeholder="search product")
-        button(class="btn btn-outline-success" type="submit") Search
-    span(id="username")
-      h1= username
-    block content
+    script(src="/app.js")
+    script(src='/homepage/home.controller.js')
+    script(src='/common/services/queryService.js')
+    script(src='/common/services/productService.js')
+    script(src='/productDetails/detailController.js')
+
+
+  .container
+    div(ng-view)
+      block content

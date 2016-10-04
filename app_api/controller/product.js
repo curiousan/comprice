@@ -191,7 +191,7 @@ module.exports.updateProduct = function (req, res) {
 module.exports.deleteProduct = function (req, res) {
  if(!req.params.productId){
      sendJSONresponse(res,404,{
-         "message":" Shop id and product Id is required"
+         "message":"Shop id and product Id is required"
      });
      return;
  }
