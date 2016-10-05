@@ -20,7 +20,7 @@ aws.config.update({
     secretAccessKey: "+nTvzotuuC+d1KkK3HQQdwHptNv/RDjr6rMbVLqc"
       
 });
-var s3 = new aws.S3({"signatureVersion": 'v4',
+var s3 = new aws.S3({"signatureVersion": 'v4'
                     });
 
 require('./app_api/models/db');

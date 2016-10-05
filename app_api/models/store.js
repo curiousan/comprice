@@ -19,7 +19,8 @@ var storeSchema = new mongoose.Schema({
 	address:{type:String, required: true},
 	coords: {type: [Number], index: '2dsphere'} ,
     openingTime: [openingTimeSchema],
-    reviews: [reviewSchema]
+    reviews: [reviewSchema],
+    image: String
 });
 
 mongoose.model('store',storeSchema);
