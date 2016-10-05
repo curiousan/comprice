@@ -9,11 +9,15 @@ function config($routeProvider){
 
     $routeProvider
         .when('/',{
+            templateUrl:'indexpage/index.html',
+
+    })
+        .when('/home',{
             templateUrl:'homepage/base_layout.html',
             controller:'homeCtrl',
             controllerAs:'vm'
 
-    })
+        })
         .when('/productDetail',{
             templateUrl:'productDetails/results.html',
             controller:'detailCtrl',
@@ -26,3 +30,5 @@ function config($routeProvider){
 angular
     .module('comprice')
     .config(['$routeProvider',config]);
+
+

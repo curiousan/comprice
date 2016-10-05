@@ -9,8 +9,12 @@ function queryProduct($http){
     function queriedProducts(productName){
         return $http.get('api/products/searchItem?search='+productName);
     };
+    function allProducts(){
+        return $http.get('api/products');
+    };
     return {
-        queriedProducts:queriedProducts
+        queriedProducts:queriedProducts,
+        allProducts:allProducts
     };
 
 
