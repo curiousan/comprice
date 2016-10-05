@@ -40,6 +40,7 @@ var app = express();
 // view engine setup
 
 app.set('views', path.join(__dirname, 'app_server','views'));
+app.use(express.static(path.join(__dirname, 'comprice_client')));
 app.use(passport.initialize());
 app.use(passport.session());
 app.set('view engine', 'jade');
