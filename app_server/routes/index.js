@@ -7,8 +7,8 @@ var upload = multer({dest: 'uploads'});
 var type = upload.single('uploadedFile');
 
 aws.config.update({
-     accessKeyId: "AKIAIDXDVATPKNJMPUUQ",
-    secretAccessKey: "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"
+     accessKeyId: "",
+    secretAccessKey: ""
       
 });
 var s3 = new aws.S3({"signatureVersion": 'v4',
