@@ -4,7 +4,7 @@
 angular.module('comprice',['ngRoute']);
 
 
-function config($routeProvider){
+function config($routeProvider, uiGmapGoogleMapApiProvider){
 
 
     $routeProvider
@@ -24,7 +24,14 @@ function config($routeProvider){
             controllerAs:'vm'
 
         })
+        .when('/shopDetails',{
+            templateUrl:'shopDetails/shopDetails.html'
+
+
+        })
         .otherwise({redirectTo:'/'})
+
+
 
 }
 angular

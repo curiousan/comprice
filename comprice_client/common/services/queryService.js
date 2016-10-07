@@ -9,12 +9,16 @@ function queryProduct($http){
     function queriedProducts(productName){
         return $http.get('api/products/searchItem?search='+productName);
     };
+    function filterProduct(catergory,maxPrice){
+        return $http.get('api/products/filterItems?category='+catergory+'&maxPrice='+maxPrice+'&minPrice=0');
+    };
     function allProducts(){
         return $http.get('api/products');
     };
     return {
         queriedProducts:queriedProducts,
-        allProducts:allProducts
+        allProducts:allProducts,
+        filterProduct:filterProduct
     };
 
 
