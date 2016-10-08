@@ -6,6 +6,9 @@ angular
     .service('queryProduct',queryProduct);
 
 function queryProduct($http){
+    var shopID=[];
+
+
     function queriedProducts(productName){
         return $http.get('api/products/searchItem?search='+productName);
     };
@@ -15,10 +18,21 @@ function queryProduct($http){
     function allProducts(){
         return $http.get('api/products');
     };
+    function getShop(shopId){
+        return $http.get('api/localShops/'+shopId);
+    };
+    var shopToBeLocated=function(shopId){
+        shopID.push(shopId);
+    }
+    var getShopID=function(){
+        return shopID[0];
+    }
+
     return {
         queriedProducts:queriedProducts,
         allProducts:allProducts,
-        filterProduct:filterProduct
+        filterProduct:filterProduct,
+        getShop:getShop
     };
 
 

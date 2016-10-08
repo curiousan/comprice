@@ -25,8 +25,8 @@ function config($routeProvider, uiGmapGoogleMapApiProvider){
 
         })
         .when('/shopDetails',{
-            templateUrl:'shopDetails/shopDetails.html'
-
+            templateUrl:'shopDetails/shopDetails.html',
+            controller:"mapContoller"
 
         })
         .otherwise({redirectTo:'/'})

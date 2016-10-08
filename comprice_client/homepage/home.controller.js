@@ -5,8 +5,6 @@ angular
     .module('comprice')
     .controller('homeCtrl',homeCtrl);
 
-var product;
-var map;
 $('#error').hide();
     $('#product').keypress(function(e) {
     if (e.keyCode === 13){
@@ -23,9 +21,6 @@ $('#error').hide();
 });
 
 function homeCtrl($scope,queryProduct,productService) {
-    $scope.maxRange="800";
-    $scope.minRange="0";
-    $scope.value="700";
     var vm=this;
     $scope.productId=function(id){
         productService.pushProductId(id);

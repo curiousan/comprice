@@ -15,6 +15,7 @@ function productService($http){
     var pushProductId=function(id){
         productId.push(id);
     }
+
     var getProductId=function(){
         return productId;
     }
