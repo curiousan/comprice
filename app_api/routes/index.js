@@ -3,10 +3,14 @@
 var express = require('express');
 var router = express.Router();
 var aws = require('aws-sdk');
+var multer = require('multer');
+
 var ctrlAbout = require('../controller/About');
 var ctrlProduct = require('../controller/product');
 var localShops = require('../controller/localShops');
 var fs = require('fs');
+var upload = multer({dest: 'uploads'});
+var type = upload.single('uploadedFile');
 
 aws.config.update({
      accessKeyId: "AKIAJ4I6F5YLFZ3JNW2A",
@@ -53,11 +57,10 @@ router.get('/products',ctrlProduct.getAllProducts);
 router.post('/localShops/:shopId/products',ctrlProduct.addItems);
 
 // get specific items of a specific shops
-<<<<<<< HEAD
 router.get('/products/getProduct/:productId',ctrlProduct.getProduct);
-=======
+
 router.get('/products/getSpecificProduct/:productId',ctrlProduct.getProduct);
->>>>>>> refs/remotes/origin/master
+
 
 //update a product
 router.put('/products/:productId',ctrlProduct.updateProduct);
@@ -82,11 +85,11 @@ router.get('/getBuckets', function(res,res){
    }) ;
     
 });
-router.post('/addFiles', function(req,res){
+router.post('/addFiles',type, function(req,res){
    var request = {
-       Body: fs.readFileSync(req.files.path),
+       Body: fs.readFileSync(req.file.path),
        Bucket: "compricebucket123",
-       key: req.files.name
+       key: req.file.originalname
        
    };
     s3.putObject(request, function(err,data){

@@ -9,7 +9,7 @@ function config($routeProvider){
 
     $routeProvider
         .when('/',{
-            templateUrl:'indexpage/index.html',
+            templateUrl:'indexpage/fileUpload.html',
 
     })
         .when('/home',{

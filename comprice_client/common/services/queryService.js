@@ -12,9 +12,13 @@ function queryProduct($http){
     function allProducts(){
         return $http.get('api/products');
     };
+    function upload(){
+        return $http.post('api/addFiles');
+    };
     return {
         queriedProducts:queriedProducts,
-        allProducts:allProducts
+        allProducts:allProducts,
+        upload:upload
     };
 
 

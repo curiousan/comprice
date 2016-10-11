@@ -22,11 +22,11 @@ router.get('/TEST', function(req, res, next) {
   res.status(200);
   res.json({"status" :"success"});
 });
-router.get('/home', function(req, res, next) {
+router.get('/fileUpload', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 router.post('/', type,function(req, res, next) {
-    console.log('FIRST TEST: ' + JSON.stringify(req.file));
+      console.log('FIRST TEST: ' + JSON.stringify(req.file));
       console.log('Second TEST: ' + JSON.stringify(req.file.originalname));
 
    var request = {
