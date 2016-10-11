@@ -9,8 +9,8 @@ var localShops = require('../controller/localShops');
 var fs = require('fs');
 
 aws.config.update({
-     accessKeyId: "AKIAJ4I6F5YLFZ3JNW2A",
-    secretAccessKey: "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"
+     accessKeyId: "*********A",
+    secretAccessKey: "*******"
       
 });
 var s3 = new aws.S3();
