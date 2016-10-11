@@ -19,6 +19,7 @@ function queryProduct($http){
         return $http.get('api/products');
     };
     function getShop(shopId){
+        console.log("here in get shop");
         return $http.get('api/localShops/'+shopId);
     };
     var shopToBeLocated=function(shopId){

@@ -34,6 +34,8 @@ $scope.searchProduct=function(){
                 queryProduct.allProducts($scope.queryProduct)
                     .success(function(data){
                         vm.data=data;
+                        var image=data.image;
+
 
                     })
             }
@@ -57,6 +59,8 @@ queryProduct.queriedProducts(product)
     $scope.queryProduct="";
 
 
+
+
     $scope.filterProduct=function(){
         $scope.$watchCollection('category + priceRange ',function(){
             var category=$('#category option:selected').text();
@@ -78,3 +82,4 @@ queryProduct.queriedProducts(product)
     }
 
 }
+

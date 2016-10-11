@@ -16,6 +16,7 @@
 				<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 				<!--Custom Css-->
 				<link rel="stylesheet" type="text/css" href="/homepage/base_layout.css">
+
 			</head>
 			<body>
 				<!--Header-->
@@ -24,19 +25,19 @@
 				<header class="mdl-layout__header">
 					<div class="mdl-layout__header-row">
 						<div class="mdl-layout-title">
-							<img id="logo" src="images/top_img.png"/>
+							<a href="#/"><img id="logo" src="images/comprice3.png"/></a>
 						</div>
 						<div class="mdl-layout-spacer"></div>
 						<div id="search_holder"> 
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
 							mdl-textfield--floating-label mdl-textfield--align-right">
 							<label class="mdl-button mdl-js-button mdl-button--icon"
-							for="fixed-header-drawer-exp">
+							for="fixed-header-drawer-exp" style="margin-top: 50px;">
 							<i class="material-icons">search</i>
 						</label>
 						<div class="mdl-textfield__expandable-holder">
 							<input class="mdl-textfield__input" type="text" name="sample"
-							id="fixed-header-drawer-exp" ng-model="queryProduct">
+							id="fixed-header-drawer-exp" ng-model="queryProduct" style="margin-top:50px;">
 						</div>
 					</div>
 				</div>
@@ -50,20 +51,22 @@
 					<div class="select_holder">
 						<!--Select -->
 						<div class="mdl-selectfield">
-							<label>Select Category</label>
-							<select class="browser-default">
-								<option value="" disabled selected>Choose your option</option>
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
-							</select>
+							<label><p id="select">Select Category</p></label>
+
+								<select class="browser-default" id="category" ng-model="category"  >
+									<option value="" style="background: #efefef;">All</option>
+									<option value="1">clothes</option>
+									<option value="2">laptop</option>
+									<option value="3">phone</option>
+								</select>
+
 						</div>
 					</div>
 					
 					<!--Sliders-->
 					<!--Price--> 
 					<div id="price_slider">
-						<label for="output">Chose maximum price</label> <div class="output mdl-textfield" id="eur_output">50 </div>
+						<label for="output" style="font-size: 16px;margin: 10px;">Chose maximum price</label> <div class="output mdl-textfield" id="eur_output">50 </div>
 						
 						<div class="slider">
 							<input class="bar" type="range" id="priceRange" value="50" max="1000" min="0" step="10" onchange="document.getElementById('eur_output').innerHTML = this.value;"/>
@@ -71,7 +74,7 @@
 					</div>
 					<!--Distance--> 
 					<div id="radius_slider">
-						<label for="output">Chose maximum distance</label> <div class="output mdl-textfield" id="km_output">50 </div>
+						<label for="output" style="font-size: 16px;margin: 10px;">Chose maximum distance</label> <div class="output mdl-textfield" id="km_output">50 </div>
 						
 						<div class="slider">
 							<input class="bar" type="range" id="distanceRange" value="50" max="100" min="0" step="5" onchange="document.getElementById('km_output').innerHTML = this.value;"/>
@@ -88,14 +91,12 @@
 			
 			<div class="demo-card-wide mdl-card mdl-shadow--2dp" style=" margin-top:5px;" >
 				<div class="mdl-card__title">
-					<h3 class="mdl-card__title-text" style="color:black;">{{vm.data.name}}</h3>
+					<h3 class="mdl-card__title-text">{{vm.data.name}}</h3>
 				</div>
 				<div class="mdl-card__supporting-text">
 					Brand: {{vm.data.brand}}<br>
 					Shop: {{vm.data.shopName}}<br>
 					Discount: {{vm.data.discounts}}<br>
-					value: {{vm.data.shopID}}
-
 				</div>
 
 				<div class="mdl-card__actions mdl-card--border">

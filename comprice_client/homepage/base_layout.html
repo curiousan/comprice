@@ -3,7 +3,7 @@
 	<!-- Material Design Lite -->
 	<title>Comprice</title>
 	<script src="https://storage.googleapis.com/code.getmdl.io/1.0.3/material.min.js"></script>
-	<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.light_green-indigo.min.css">
+
 	<!-- Material Design icon font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script>
@@ -20,42 +20,40 @@
 </head>
 
 		  <body>
-		  <div class="mdl-layout mdl-js-layout
+		  <div id="nav" class="mdl-layout mdl-js-layout
 		                mdl-layout--fixed-header">
 		       <header class="mdl-layout__header">
 		        <div class="mdl-layout__header-row">
-		             <div class="mdl-layout-title">
-		            <img id="logo" src="images/top_img.png"/>
+		             <div class="mdl-layout-title" >
+		           <a href="#/"> <img  id="logo" src="images/comprice3.png"/></a>
 		            </div>
 		            <div class="mdl-layout-spacer"></div>
 		                <div id="search_holder"> 
 		          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
 		                      mdl-textfield--floating-label mdl-textfield--align-right">
 		            <label class="mdl-button mdl-js-button mdl-button--icon"
-		                   for="fixed-header-drawer-exp">
+		                   for="fixed-header-drawer-exp" style="margin-top: 50px;">
 		              <i class="material-icons">search</i>
 		            </label>
 					  <form >
 		            <div class="mdl-textfield__expandable-holder">
 		              <input class="mdl-textfield__input" type="text" name="sample"
-		                     id="fixed-header-drawer-exp" ng-model="queryProduct" ng-click="searchProduct()">
+		                     id="fixed-header-drawer-exp" ng-model="queryProduct" ng-click="searchProduct()" style="margin-top:50px;" >
 		            </div>
 						  </form>
 		          </div>
 		         </div>
 		        </div>
 		      </header>
-		      <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
-		  <div class="mdl-layout__drawer">
-			  <ng-map center="[40.74, -74.18]"></ng-map>
-		      
+			  </div>
+		      <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer" id="content">
+		  <div class="mdl-layout__drawer" >
 		    <nav class="mdl-navigation">
 		         <div class="select_holder">
-		      <!--Select -->
 		      <div class="mdl-selectfield">
-		        <label>Select Category</label>
-		        <select class="browser-default" id="category" ng-model="category" >
-		          <option value="">All</option>
+		        <label><p  id="select">Select Category</p></label>
+		        <select class="browser-default" id="category" ng-model="category"  >
+		          <option value="" style="background: #efefef;">All</option>
 		          <option value="1">clothes</option>
 		          <option value="2">laptop</option>
 		          <option value="3">phone</option>
@@ -66,9 +64,7 @@
 	         <!--Sliders-->
 	            <!--Price-->
 		        <div id="price_slider">
-					<rzslider rz-slider-model="slider.value"
-							  rz-slider-options="slider.options"></rzslider>
-		            <label for="output">Chose maximum price</label> <div class="output mdl-textfield" id="eur_output">800 </div>
+		            <label for="output" style="font-size: 16px;margin: 10px;">Chose maximum price</label> <div class="output mdl-textfield" id="eur_output">800 </div>
 		            
 		        <div class="slider">
 
@@ -78,7 +74,7 @@
 		</div>
 	              <!--Distance--> 
 		          <div id="radius_slider">
-		            <label for="output">Chose maximum distance</label> <div class= "output mdl-textfield" id="km_output">50 </div>
+		            <label for="output" style="font-size: 16px;margin: 10px;">Chose maximum distance</label> <div class= "output mdl-textfield" id="km_output">50 </div>
 		            
 		        <div class="slider">
 		 <input class="bar" type="range" id="distanceRange" value="50" max="100" min="0" step="5" onchange="document.getElementById('km_output').innerHTML = this.value;"/>
@@ -93,17 +89,21 @@
 
 
 
-			  <main class="mdl-layout__content" style="margin-left:18%; margin-top:5px;">
+			  <main class="mdl-layout__content" style="margin-left:12%; padding:15px;">
 		          
-		<div class="demo-card-square mdl-card mdl-shadow--2dp" ng-repeat="item in vm.data">
+		<div class="demo-card-square mdl-card mdl-shadow--2dp" ng-repeat="item in vm.data" id="card">
 		  <div class="mdl-card__title mdl-card--expand">
-		    <h4 class="mdl-card__title-text">{{item.name|uppercase}}
-				</h4>
-			  <p class="mdl-card__title-text" style="color:red;float:right;padding-right:10px;">{{item.price|currency}}</p>
+
 		  </div>
+			<div id="productName" style="margin-top:0px;height:45px;">
+			<h4>{{item.name|uppercase}}
+				<p class="mdl-card__title-text" >{{item.price|currency}}</p>
+			</h4>
+
+			</div>
 		  <div class="mdl-card__supporting-text">
 			  Available in  {{item.shopName}}
-		  </div> 
+		  </div>
 		  <div class="mdl-card__actions mdl-card--border">
 		    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="#productDetail" ng-click='productId(item._id)'>
 		      View Product

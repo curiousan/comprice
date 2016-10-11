@@ -11,6 +11,8 @@ function detailCtrl($scope,productService) {
     productService.queriedProduct(prouductId[0])
                 .success(function(data){
                     vm.data=data;
+                    var image=data.image;
+                    productService.getImage(image)
                     console.log("the datea"+data.shopID);
                   productService.pushProductId(data.shopID);
 

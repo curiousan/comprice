@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
 
-    <script src="shopDetails/mapController.js"></script>
+
     <style>
         #map {
             height: 700px;
@@ -14,44 +14,88 @@
         }
     </style>
 </head>
-<body>
+<body ng-controller="mapController">
 <div id="map"></div>
 
+<h4 id="distance"></h4>
 <script>
     var map;
     function initMap() {
-        var myLatlng = new google.maps.LatLng(longitude,latitude);
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat:longitude, lng:latitude},
-            zoom: 16
-        });
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            map: map,
-            title: 'Hello World!'
+        var marker1;
+        var marker2;
+        var mypos;
+        console.log("here in map");
+        var myLatlng = new google.maps.LatLng(latitude,longitude);
+         map = new google.maps.Map(document.getElementById('map'), {
+
+            center: {lat:latitude, lng:longitude },
+            zoom: 18
+        }),
+                directionsService = new google.maps.DirectionsService,
+                directionsDisplay = new google.maps.DirectionsRenderer({
+                    map: map
+                }),
+                marker1 = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: 'Hello World!',
+                    icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                });
+
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+               var  pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                 mypos=new google.maps.LatLng( position.coords.latitude, position.coords.longitude);
+                console.log("The lat and long "+pos.lat + " "+pos.lng);
+                calculateAndDisplayRoute(directionsService, directionsDisplay, mypos, myLatlng);
+            });
+        }
+        marker2 = new google.maps.Marker({
+            position: mypos,
+            map: map
         });
 
 
-    var infoWindow = new google.maps.InfoWindow({map: map});
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            console.log("The location  "+pos.lat);
-        }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
+
     }
-    
+    function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+console.log("here1asdasd");
+        directionsService.route({
+            origin: pointA,
+            destination: pointB,
+            travelMode: google.maps.DirectionsTravelMode.DRIVING
+        }, function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+                var step=parseInt(response.routes[0].legs[0].steps.length);
+                var location=Math.round( step/2 )
+                console.log("the steps"+ step);
+                var distance=response.routes[0].legs[0].distance.value;
+                var time=response.routes[0].legs[0].duration.text;
+                var infoContent="Distance: "+ distance/1000+" Km"+"<br>"+"Driving time: "+ time;
+                var infoWindow=new google.maps.InfoWindow({
+                    content:infoContent
+
+                });
+                infoWindow.setPosition(response.routes[0].legs[0].steps[location].end_location);
+                infoWindow.open(map);
+
+                $('#distance').append(distance/1000+" Km");
+
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
     }
+
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvRnqDJdIoDSfHGmyRakdUR2TRQ4j1d2w&callback=initMap" async defer></script>
+
+
 
 </body>
 </html>

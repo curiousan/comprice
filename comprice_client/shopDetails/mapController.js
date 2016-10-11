@@ -16,6 +16,8 @@ function mapController($scope,productService,queryProduct){
                 latitude=codr[0];
                 longitude=codr[1];
                 console.log("The data"+ latitude+ " "+ longitude);
+                    $('body').append('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvRnqDJdIoDSfHGmyRakdUR2TRQ4j1d2w&callback=initMap" async defer></script>')
+
 
             })
 

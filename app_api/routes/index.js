@@ -40,6 +40,9 @@ router.delete('/localShops/:shopId',localShops.deleteShop);
 // find the shops nearby
 router.get('/localShops/findtheshops/nearbyShops',localShops.findShops);
 
+//download image
+router.get ('/products/image', localShops.downloadFileFromS3);
+
 /*
 ******** products ****************
 
@@ -70,6 +73,8 @@ router.get ('/products/searchItem',ctrlProduct.searchItem);
 
 //filter the items
 router.get ('/products/filterItems',ctrlProduct.filterItem);
+
+
 
 //test amazon web services 
 router.get('/getBuckets', function(res,res){

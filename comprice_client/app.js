@@ -9,7 +9,7 @@ function config($routeProvider, uiGmapGoogleMapApiProvider){
 
     $routeProvider
         .when('/',{
-            templateUrl:'indexpage/index.html',
+            templateUrl:'indexpage/index2.html',
 
     })
         .when('/home',{
