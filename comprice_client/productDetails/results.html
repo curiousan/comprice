@@ -15,7 +15,7 @@
 				<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 				<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 				<!--Custom Css-->
-				<link rel="stylesheet" type="text/css" href="/homepage/base_layout.css">
+				<link rel="stylesheet" type="text/css" href="/productDetails/details.css">
 
 			</head>
 			<body>
@@ -28,89 +28,47 @@
 							<a href="#/"><img id="logo" src="images/comprice3.png"/></a>
 						</div>
 						<div class="mdl-layout-spacer"></div>
-						<div id="search_holder"> 
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-							mdl-textfield--floating-label mdl-textfield--align-right">
-							<label class="mdl-button mdl-js-button mdl-button--icon"
-							for="fixed-header-drawer-exp" style="margin-top: 50px;">
-							<i class="material-icons">search</i>
-						</label>
-						<div class="mdl-textfield__expandable-holder">
-							<input class="mdl-textfield__input" type="text" name="sample"
-							id="fixed-header-drawer-exp" ng-model="queryProduct" style="margin-top:50px;">
-						</div>
-					</div>
-				</div>
+						<a href="#/"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-left:60px;margin-top: 35px;">
+							Home
+						</button></a>
+						<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-left:20px;margin-top: 35px;">
+							Contact
+						</button>
+
 			</div>
 		</header>
-		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
-			<div class="mdl-layout__drawer">
-				
-				
-				<nav class="mdl-navigation">
-					<div class="select_holder">
-						<!--Select -->
-						<div class="mdl-selectfield">
-							<label><p id="select">Select Category</p></label>
 
-								<select class="browser-default" id="category" ng-model="category"  >
-									<option value="" style="background: #efefef;">All</option>
-									<option value="1">clothes</option>
-									<option value="2">laptop</option>
-									<option value="3">phone</option>
-								</select>
 
-						</div>
-					</div>
-					
-					<!--Sliders-->
-					<!--Price--> 
-					<div id="price_slider">
-						<label for="output" style="font-size: 16px;margin: 10px;">Chose maximum price</label> <div class="output mdl-textfield" id="eur_output">50 </div>
-						
-						<div class="slider">
-							<input class="bar" type="range" id="priceRange" value="50" max="1000" min="0" step="10" onchange="document.getElementById('eur_output').innerHTML = this.value;"/>
-						</div>
-					</div>
-					<!--Distance--> 
-					<div id="radius_slider">
-						<label for="output" style="font-size: 16px;margin: 10px;">Chose maximum distance</label> <div class="output mdl-textfield" id="km_output">50 </div>
-						
-						<div class="slider">
-							<input class="bar" type="range" id="distanceRange" value="50" max="100" min="0" step="5" onchange="document.getElementById('km_output').innerHTML = this.value;"/>
-						</div>
-					</div>
 
-				</nav>
-			</div>
-		</div>
 		
-		
-		
-		<main class="mdl-layout__content" style="margin-left:15% ; margin-top:5px;">
+		<main class="mdl-layout__content" >
 			
-			<div class="demo-card-wide mdl-card mdl-shadow--2dp" style=" margin-top:5px;" >
+			<div class="demo-card-wide mdl-card mdl-shadow--2dp"style="border:10px;border-radius:10px;" >
 				<div class="mdl-card__title">
-					<h3 class="mdl-card__title-text">{{vm.data.name}}</h3>
+					<img  ng-src="{{('http://s3.eu-central-1.amazonaws.com/compricebucket123/'+vm.data.image)}}" onerror="this.src='https://s3.amazonaws.com/ae-plugins/shared/images/default-thumb-300x300.png'" style="height:300px;width:300px;"/>
 				</div>
-				<div class="mdl-card__supporting-text">
+
+				<h3 style="padding:0;margin:3px;border:1px solid #efefef">{{vm.data.name|uppercase}}</h3>
+				<h5 style="margin-left:3px;margin-top:10px;">
 					Brand: {{vm.data.brand}}<br>
-					Shop: {{vm.data.shopName}}<br>
-					Discount: {{vm.data.discounts}}<br>
-				</div>
+					Store: {{vm.data.shopName}}<br>
+					Discount: {{vm.data.discounts}} %<br>
+				</h5>
 
 				<div class="mdl-card__actions mdl-card--border">
 
-					<div class="shopPrice">
-						{{vm.data.price}}$
-					</div>
-					<a href="#shopDetails"  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="float:right; margin-top:8px;">
-						View Store Location
+					<h4 class="shopPrice" style="margin:0px;float:left;color:red;color:red;padding:0;">
+						{{vm.data.price|currency}}
+					</h4>
+					<a href="#shopDetails"  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="float:right; margin-top:8px;font-size:100%;">
+						View Store Details
 					</a>
 				</div>
 			</div>
 		</main>
 	</div>
+
+
 	
 </body>
 </html>

@@ -27,7 +27,9 @@
 		             <div class="mdl-layout-title" >
 		           <a href="#/"> <img  id="logo" src="images/comprice3.png"/></a>
 		            </div>
-		            <div class="mdl-layout-spacer"></div>
+		            <div class="mdl-layout-spacer">
+
+					</div>
 		                <div id="search_holder"> 
 		          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
 		                      mdl-textfield--floating-label mdl-textfield--align-right">
@@ -35,6 +37,7 @@
 		                   for="fixed-header-drawer-exp" style="margin-top: 50px;">
 		              <i class="material-icons">search</i>
 		            </label>
+
 					  <form >
 		            <div class="mdl-textfield__expandable-holder">
 		              <input class="mdl-textfield__input" type="text" name="sample"
@@ -43,6 +46,12 @@
 						  </form>
 		          </div>
 		         </div>
+					<a href="#/"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-left:60px;margin-top: 35px;">
+						Home
+					</button></a>
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-left:20px;margin-top: 35px;">
+						Contact
+					</button>
 		        </div>
 		      </header>
 			  </div>
@@ -93,11 +102,12 @@
 		          
 		<div class="demo-card-square mdl-card mdl-shadow--2dp" ng-repeat="item in vm.data" id="card">
 		  <div class="mdl-card__title mdl-card--expand">
+			  <img id="image" ng-src="{{('http://s3.eu-central-1.amazonaws.com/compricebucket123/'+item.image)}}" onerror="this.src='https://s3.amazonaws.com/ae-plugins/shared/images/default-thumb-300x300.png'" style="height:200px;width:200px;"/>
 
 		  </div>
 			<div id="productName" style="margin-top:0px;height:45px;">
 			<h4>{{item.name|uppercase}}
-				<p class="mdl-card__title-text" >{{item.price|currency}}</p>
+				<p class="mdl-card__title-text" style="color:red;float:right;padding-right:10px;font-size:14px;">{{item.price|currency}}</p>
 			</h4>
 
 			</div>

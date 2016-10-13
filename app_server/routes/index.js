@@ -6,13 +6,6 @@ var multer = require('multer');
 var upload = multer({dest: 'uploads'});
 var type = upload.single('uploadedFile');
 
-aws.config.update({
-     accessKeyId: "AKIAIDXDVATPKNJMPUUQ",
-    secretAccessKey: "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"
-      
-});
-var s3 = new aws.S3({"signatureVersion": 'v4',
-                    });
 
 var ctrlOther=require('../controllers/others');
 

@@ -9,11 +9,12 @@ var localShops = require('../controller/localShops');
 var fs = require('fs');
 
 aws.config.update({
-     accessKeyId: "AKIAJ4I6F5YLFZ3JNW2A",
-    secretAccessKey: "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"
-      
+     accessKeyId: "AKIAJNHEEGRQAT6PW7EA",
+    secretAccessKey: "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"
+
 });
-var s3 = new aws.S3();
+var s3 = new aws.S3({"signatureVersion": 'v4'
+});
 /*
 ********** Local Shops **********
 
@@ -87,13 +88,30 @@ router.get('/getBuckets', function(res,res){
    }) ;
     
 });
+router.get('/getImage', function(req,res){
+    console.log("the key"+ req.query.name);
+    var options = {
+        Bucket: "compricebucket123",
+        Key: req.query.name
+    };
+    s3.getObject(options,function(err,data){
+        if(err){
+            console.log(err);
+        }else{
+                console.log("The image query"+ req.query.name);
+            res.end(data.Body);
+        }
+
+    });
+
+});
 router.post('/addFiles', function(req,res){
    var request = {
        Body: fs.readFileSync(req.files.path),
        Bucket: "compricebucket123",
        key: req.files.name
        
-   };
+   }
     s3.putObject(request, function(err,data){
         if (err){
             console.log(err);

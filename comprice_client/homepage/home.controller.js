@@ -4,11 +4,11 @@
 angular
     .module('comprice')
     .controller('homeCtrl',homeCtrl);
-
+var product="";
 $('#error').hide();
     $('#product').keypress(function(e) {
     if (e.keyCode === 13){
-    product=$('#product').val();
+     product=$('#product').val();
         if(product!==""){
             window.location="#home";
         }
@@ -35,6 +35,12 @@ $scope.searchProduct=function(){
                     .success(function(data){
                         vm.data=data;
                         var image=data.image;
+                        console.log("the images "+ data.image);
+                        console.log("teh image lenght "+data.length)
+
+
+
+
 
 
                     })
@@ -49,13 +55,30 @@ $scope.searchProduct=function(){
         });
 }
 
+if(product===""){
+    queryProduct.filterProduct("","1000")
+        .success(function(data){
+            vm.data=data;
+            console.log(data);
+            var image=data.image;
+            var imageurl;
 
+
+
+
+        })
+}
+else{
 queryProduct.queriedProducts(product)
  .success(function(data){
  vm.data=data;
-     console.log(data);
+     var image=data.image;
+     console.log("the images "+ data.image);
+
+
 
  })
+}
     $scope.queryProduct="";
 
 
@@ -76,6 +99,12 @@ queryProduct.queriedProducts(product)
                 .success(function(data){
                     vm.data=data;
                     console.log(data);
+                    var image=data.image;
+                    var imageurl;
+
+
+
+
                 })
         },true);
 
