@@ -254,7 +254,7 @@ module.exports.filterItem = function (req, res) {
    if(req.query.minPrice)var minPrice =req.query.minPrice ;
    if(req.query.maxPrice)var maxPrice =req.query.maxPrice ;
   
-  
+
    
         new Promise(function(resolve,reject){
         products.find({

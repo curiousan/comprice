@@ -12,12 +12,7 @@ var fs = require('fs');
 var upload = multer({dest: 'uploads'});
 var type = upload.single('uploadedFile');
 
-aws.config.update({
-     accessKeyId: "AKIAJ4I6F5YLFZ3JNW2A",
-    secretAccessKey: "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"
-      
-});
-var s3 = new aws.S3();
+var s3 = require('./../../app').S3;
 /*
 ********** Local Shops **********
 
@@ -44,6 +39,9 @@ router.delete('/localShops/:shopId',localShops.deleteShop);
 // find the shops nearby
 router.get('/localShops/findtheshops/nearbyShops',localShops.findShops);
 
+//download image
+router.get ('/products/image', localShops.downloadFileFromS3);
+
 /*
 ******** products ****************
 
@@ -57,8 +55,6 @@ router.get('/products',ctrlProduct.getAllProducts);
 router.post('/localShops/:shopId/products',ctrlProduct.addItems);
 
 // get specific items of a specific shops
-router.get('/products/getProduct/:productId',ctrlProduct.getProduct);
-
 router.get('/products/getSpecificProduct/:productId',ctrlProduct.getProduct);
 
 
@@ -74,8 +70,10 @@ router.get ('/products/searchItem',ctrlProduct.searchItem);
 //filter the items
 router.get ('/products/filterItems',ctrlProduct.filterItem);
 
+
+
 //test amazon web services 
-router.get('/getBuckets', function(res,res){
+router.get('/getBuckets', function(req,res){
    s3.listBuckets(function(err, buckets){
        if (err){
            console.log(err);
@@ -84,6 +82,25 @@ router.get('/getBuckets', function(res,res){
        }
    }) ;
     
+});
+router.get('/getImage', function(req,res){
+      console.log("the key "+ req.query.name);
+    var options = {
+       Bucket: "compricebucket123",
+       Key: req.query.name
+   };
+     s3.getObject(options,function(err,data){
+         if(err){
+             console.log(err);
+             console.log("something wrong happend");
+         }else{
+       console.log("downloading file");
+
+         console.log(data.Body);
+            res.end(data.Body);
+         }
+        
+     });
 });
 router.post('/addFiles',type, function(req,res){
    var request = {

@@ -4,7 +4,14 @@ var mongoose = Promise.promisifyAll(require('mongoose'));
 require('body-parser');
 var store = mongoose.model('store');
 var fs = require('fs');
-var s3 = require('./../../app').S3;
+var aws = require('aws-sdk');
+aws.config.update({
+     accessKeyId: "AKIAJNHEEGRQAT6PW7EA",
+    secretAccessKey: "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"
+      
+});
+var s3 = new aws.S3({"signatureVersion": 'v4'
+                    });
 var multer = require('multer');
 var upload = multer({dest: 'uploads'});
 var type = upload.single('uploadedFile');
@@ -58,17 +65,19 @@ var uploadFileToS3 = function(req,res){
 };
 
 //test function for file download
-var downloadFileFromS3 = function(req,res,key){
+module.exports.downloadFileFromS3 = function(req,res){
+        console.log("the key "+ req.query.name);
     var options = {
        Bucket: "compricebucket123",
-       Key: key
+       Key: req.query.name
    };
      s3.getObject(options,function(err,data){
          if(err){
              console.log(err);
+             console.log("something wrong happend");
          }else{
-            res.contentType('image/png');
-            res.end(data.Body);
+    
+            return(req.query.name);
          }
         
      });

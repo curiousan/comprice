@@ -1,0 +1,11 @@
+extends layout
+  div.container
+    if(done)
+      p Upload complete!
+    h3 upload File
+    form(enctype="multipart/form-data",method="POST")
+      label Photo:
+        p
+          input(type="file" name="uploadedFile")
+      input(type="submit" value="Submit") 
+

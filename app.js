@@ -16,8 +16,8 @@ var mongoose=require('mongoose');
 var fs = require('fs');
 var aws = require('aws-sdk');
 aws.config.update({
-     accessKeyId: "AKIAIDXDVATPKNJMPUUQ",
-    secretAccessKey: "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"
+     accessKeyId: "AKIAJNHEEGRQAT6PW7EA",
+    secretAccessKey: "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"
       
 });
 var s3 = new aws.S3({"signatureVersion": 'v4'

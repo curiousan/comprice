@@ -4,12 +4,13 @@
 angular.module('comprice',['ngRoute']);
 
 
-function config($routeProvider){
+function config($routeProvider, uiGmapGoogleMapApiProvider){
 
 
     $routeProvider
         .when('/',{
-            templateUrl:'indexpage/fileUpload.html',
+ templateUrl:'indexpage/index2.html',
+
 
     })
         .when('/home',{
@@ -24,7 +25,14 @@ function config($routeProvider){
             controllerAs:'vm'
 
         })
+        .when('/shopDetails',{
+            templateUrl:'shopDetails/shopDetails.html',
+            controller:"mapContoller"
+
+        })
         .otherwise({redirectTo:'/'})
+
+
 
 }
 angular
