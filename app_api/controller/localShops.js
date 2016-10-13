@@ -77,13 +77,8 @@ module.exports.downloadFileFromS3 = function(req,res){
              console.log(err);
              console.log("something wrong happend");
          }else{
-<<<<<<< HEAD
-    
-            return(req.query.name);
-=======
              res.contentType("image/png");
             res.end(data.Body);
->>>>>>> 9f48311e995ab1225a2094cbf7eb8b9c74afde6f
          }
         
      });

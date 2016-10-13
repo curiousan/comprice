@@ -12,9 +12,7 @@ var fs = require('fs');
 var upload = multer({dest: 'uploads'});
 var type = upload.single('uploadedFile');
 
-<<<<<<< HEAD
-var s3 = require('./../../app').S3;
-=======
+
 aws.config.update({
      accessKeyId: "AKIAJNHEEGRQAT6PW7EA",
     secretAccessKey: "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"
@@ -22,7 +20,7 @@ aws.config.update({
 });
 var s3 = new aws.S3({"signatureVersion": 'v4'
 });
->>>>>>> 9f48311e995ab1225a2094cbf7eb8b9c74afde6f
+
 /*
 ********** Local Shops **********
 
@@ -94,27 +92,7 @@ router.get('/getBuckets', function(req,res){
     
 });
 router.get('/getImage', function(req,res){
-<<<<<<< HEAD
-      console.log("the key "+ req.query.name);
-    var options = {
-       Bucket: "compricebucket123",
-       Key: req.query.name
-   };
-     s3.getObject(options,function(err,data){
-         if(err){
-             console.log(err);
-             console.log("something wrong happend");
-         }else{
-       console.log("downloading file");
 
-         console.log(data.Body);
-            res.end(data.Body);
-         }
-        
-     });
-});
-router.post('/addFiles',type, function(req,res){
-=======
     console.log("the key"+ req.query.name);
     var options = {
         Bucket: "compricebucket123",
@@ -132,7 +110,6 @@ router.post('/addFiles',type, function(req,res){
 
 });
 router.post('/addFiles', function(req,res){
->>>>>>> 9f48311e995ab1225a2094cbf7eb8b9c74afde6f
    var request = {
        Body: fs.readFileSync(req.file.path),
        Bucket: "compricebucket123",

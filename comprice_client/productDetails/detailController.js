@@ -17,14 +17,6 @@ function detailCtrl($scope,productService,queryProduct) {
     productService.queriedProduct(prouductId[length-1])
                 .success(function(data){
                     vm.data=data;
-<<<<<<< HEAD
-                    var image= 'https://s3.eu-central-1.amazonaws.com/compricebucket123/'+data.image;
-                     console.log("image link is "+ image);
-                   
-                    
-                       $('#image').append('<img src="https://s3.eu-central-1.amazonaws.com/compricebucket123/'+data.image+'>');
-=======
->>>>>>> 9f48311e995ab1225a2094cbf7eb8b9c74afde6f
                     console.log("the datea"+data.shopID);
 
 
@@ -34,9 +26,7 @@ function detailCtrl($scope,productService,queryProduct) {
 
                   productService.pushProductId(data.shopID);
 
-<<<<<<< HEAD
-                });
-=======
+
                     var shop=productService.getProductId();
                     queryProduct.getShop(shop[shop[shop.length-1]])
                         .success(function(data){
@@ -52,15 +42,10 @@ function detailCtrl($scope,productService,queryProduct) {
 
 
                 })
->>>>>>> 9f48311e995ab1225a2094cbf7eb8b9c74afde6f
+
 
 
 
 }
-<<<<<<< HEAD
-       
-   
 
-=======
->>>>>>> 9f48311e995ab1225a2094cbf7eb8b9c74afde6f
 
