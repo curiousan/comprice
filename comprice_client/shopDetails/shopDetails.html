@@ -4,20 +4,60 @@
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-
-
+    <title>Comprice</title>
+    <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.light_green-indigo.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script>
+        componentHandler.upgradeAllRegistered();
+    </script>
+    <!--jQueryUI -->
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/productDetails/details.css">
+    <!--Custom Css-->
     <style>
         #map {
-            height: 700px;
-            width:800px;
-            border:1px solid black;
+            height:500px;
+            width:65%;
+            border:5px solid  #FDFDFD;
         }
     </style>
 </head>
 <body ng-controller="mapController">
-<div id="map"></div>
+<header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+        <div class="mdl-layout-title">
+            <a href="#/"><img id="logo" src="images/comprice3.png"/></a>
+        </div>
+        <div class="mdl-layout-spacer"></div>
+        <a href="#/"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-left:60px;margin-top: 35px;">
+            Home
+        </button></a>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="margin-left:20px;margin-top: 35px;">
+            Contact
+        </button>
 
-<h4 id="distance"></h4>
+    </div>
+</header>
+<div >
+<div id="map" style="float:left;margin-top:30px;margin-left:30px;"></div>
+<div id="shopDetails" style="float:left; margin-top:50px;padding-left:24px;">
+
+    <h4 style="padding:0;margin:5px;">{{vm.data.name|uppercase}}</h4>
+    <img src="images/4stars.png" style="width:110px;height:50px;">
+    <h6 style="padding:0;margin:0px;"> Address: {{vm.data.address}}<br></h6>
+        <h6 style="padding:0;margin:0px;"> Opening hours<br></h6>
+    <div style="padding-left: 30px;">
+   <i> Mon-Fri: 6 - 22<br>
+    Sat-Sun: 12 - 18</i>
+        </div>
+
+</div>
+
+
 <script>
     var map;
     function initMap() {
@@ -64,7 +104,6 @@
 
     }
     function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
-console.log("here1asdasd");
         directionsService.route({
             origin: pointA,
             destination: pointB,

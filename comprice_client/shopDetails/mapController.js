@@ -9,15 +9,20 @@ var map;
 var latitude;
 var longitude;
 function mapController($scope,productService,queryProduct){
+    var vm=this;
         var shop=productService.getProductId();
-        queryProduct.getShop(shop[1])
+        queryProduct.getShop(shop[shop.length-1])
             .success(function(data){
+                vm.data=data;
+                vm.weekhours=data.openingTime[1];
+                vm.weekendhours=data.openingTime[2];
+                console.log(vm.weekhours+ " "+ vm.weekendhours);
                 var codr=data.coords;
-                latitude=codr[0];
-                longitude=codr[1];
+                latitude=codr[1];
+                longitude=codr[0];
                 console.log("The data"+ latitude+ " "+ longitude);
                     $('body').append('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvRnqDJdIoDSfHGmyRakdUR2TRQ4j1d2w&callback=initMap" async defer></script>')
-
+                shop.pop();
 
             })
 

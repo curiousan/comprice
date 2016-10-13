@@ -5,7 +5,7 @@ var aws = require('aws-sdk');
 var multer = require('multer');
 var upload = multer({dest: 'uploads'});
 var type = upload.single('uploadedFile');
-var s3 = require('./../../app').S3; 
+
 
 var ctrlOther=require('../controllers/others');
 

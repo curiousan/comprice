@@ -127,12 +127,13 @@ select:focus {
     padding:15px;
     margin-left:20px;
     margin-bottom:20px;
-    border-radius:5px;
 
 }
 
 .mdl-layout__content{
-    margin-top:120px;
+    padding-top:20px;
+    width:65%;
+    padding-left:30px;
 
 }
 .mdl-layout__header{
@@ -165,7 +166,7 @@ select:focus {
     float:right;
     padding-right:10px;
     font-size:16px;
-    padding-top:35px;
+    padding-top:20px;
 
 }
 h1{
@@ -188,19 +189,22 @@ h1{
 .demo-card-wide.mdl-card {
     background: #FDFDFD;
     width: 100%;
-    max-width: 700px;
+    border:3px solid #FDFDFD;
+
 }
 .demo-card-wide > .mdl-card__title {
     color: #fff;
-    height: 300px;
-    margin:20px;
+
+
 
 }
 .demo-card-wide > .mdl-card__menu {
     color: #fff;
 }
-#map {
-    height: 700px;
-    width:800px;
-    border:1px solid black;
+h3{
+    padding:30px;
+}
+h4{
+    padding:30px;
+
 }

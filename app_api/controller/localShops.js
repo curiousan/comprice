@@ -4,19 +4,20 @@ var mongoose = Promise.promisifyAll(require('mongoose'));
 require('body-parser');
 var store = mongoose.model('store');
 var fs = require('fs');
-var aws = require('aws-sdk');
-aws.config.update({
-     accessKeyId: "AKIAJNHEEGRQAT6PW7EA",
-    secretAccessKey: "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"
-      
-});
-var s3 = new aws.S3({"signatureVersion": 'v4'
-                    });
+
 var multer = require('multer');
 var upload = multer({dest: 'uploads'});
 var type = upload.single('uploadedFile');
 var formidable = require("formidable");
 var form = new formidable.IncomingForm();
+var aws = require('aws-sdk');
+aws.config.update({
+    accessKeyId: "AKIAJNHEEGRQAT6PW7EA",
+    secretAccessKey: "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"
+
+});
+var s3 = new aws.S3({"signatureVersion": 'v4'
+});
 //method to send json response
   var sendJSONresponse = function(res,status,content){
   	res.status(status);
@@ -76,8 +77,13 @@ module.exports.downloadFileFromS3 = function(req,res){
              console.log(err);
              console.log("something wrong happend");
          }else{
+<<<<<<< HEAD
     
             return(req.query.name);
+=======
+             res.contentType("image/png");
+            res.end(data.Body);
+>>>>>>> 9f48311e995ab1225a2094cbf7eb8b9c74afde6f
          }
         
      });
