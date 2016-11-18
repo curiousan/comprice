@@ -11,17 +11,22 @@ function productService($http){
     function queriedProduct(productId){
         return $http.get('api/products/getSpecificProduct/'+productId);
     };
+    function getImage(name){
+        return $http.get('api/products/image?name='+name);
+    };
 
     var pushProductId=function(id){
         productId.push(id);
     }
+
     var getProductId=function(){
         return productId;
     }
     return {
         queriedProduct:queriedProduct,
         getProductId:getProductId,
-        pushProductId:pushProductId
+        pushProductId:pushProductId,
+        getImage:getImage
     };
 
 

@@ -40,6 +40,9 @@ router.delete('/localShops/:shopId',localShops.deleteShop);
 // find the shops nearby
 router.get('/localShops/findtheshops/nearbyShops',localShops.findShops);
 
+//download image
+router.get ('/products/image', localShops.downloadFileFromS3);
+
 /*
 ******** products ****************
 
@@ -53,11 +56,11 @@ router.get('/products',ctrlProduct.getAllProducts);
 router.post('/localShops/:shopId/products',ctrlProduct.addItems);
 
 // get specific items of a specific shops
-<<<<<<< HEAD
+
 router.get('/products/getProduct/:productId',ctrlProduct.getProduct);
-=======
+
 router.get('/products/getSpecificProduct/:productId',ctrlProduct.getProduct);
->>>>>>> refs/remotes/origin/master
+
 
 //update a product
 router.put('/products/:productId',ctrlProduct.updateProduct);
@@ -70,6 +73,8 @@ router.get ('/products/searchItem',ctrlProduct.searchItem);
 
 //filter the items
 router.get ('/products/filterItems',ctrlProduct.filterItem);
+
+
 
 //test amazon web services 
 router.get('/getBuckets', function(res,res){

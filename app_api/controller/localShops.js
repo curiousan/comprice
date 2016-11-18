@@ -58,16 +58,17 @@ var uploadFileToS3 = function(req,res){
 };
 
 //test function for file download
-var downloadFileFromS3 = function(req,res,key){
+module.exports.downloadFileFromS3 = function(req,res){
+        console.log("the key"+ req.query.name);
     var options = {
        Bucket: "compricebucket123",
-       Key: key
+       Key: req.query.name
    };
      s3.getObject(options,function(err,data){
          if(err){
              console.log(err);
          }else{
-            res.contentType('image/png');
+
             res.end(data.Body);
          }
         

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comprice Search</title>
+
+    <style>
+        body{
+            background: #EEEEEE;
+        }
+        #search{
+            position: fixed;
+            top: 30%;
+            left: 32%;
+        }
+        #logo{
+            min-width: 700px;
+            width: 30%;
+        }
+        #logo img{
+            width: 100%;
+            height: auto;
+        }
+        #bar{
+            min-width: 400px;
+
+            position: fixed;
+        }
+        input[type=text] {
+            width: 100%;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            padding: 12px 20px 12px 40px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+        #search_btn{
+            width: 10%;
+            float: right;
+            margin-top: -10%;
+            margin-left: 88%;
+            height: auto;
+            position: absolute;
+            background-color: transparent;
+            border: none;
+        }
+        #search_btn img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="search">
+    <div id="logo">
+        <img src="images/top_img.png">
+    </div>
+    <div id="bar">
+        <input type="text" name="search" placeholder="Search.." id="product"/>
+        <button  id="search_btn">
+            <img src="images/searchicon.png">
+        </button>
+        <span id="error" style="color:grey;">Enter item to search</span>
+    </div>
+</div>
+
+</body>
+<script src='/homepage/home.controller.js'></script>
+</html>
+
+
